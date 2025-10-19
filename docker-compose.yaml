@@ -1,0 +1,22 @@
+version: '3.9'
+services:
+  postgres:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: itmahesh
+      POSTGRES_PASSWORD: Mahesh_23
+      POSTGRES_DB: mydatabase
+    ports:
+      - "5432:5432"
+  hasura:
+    image: hasura/graphql-engine:latest
+    depends_on:
+      - postgres
+    ports:
+      - "8080:8080"
+    restart: always
+    environment:
+      HASURA_GRAPHQL_DATABASE_URL: postgres://itmahesh:Mahesh_23@postgres:5432/mydatabase
+      HASURA_GRAPHQL_ADMIN_SECRET: Mahesh_23
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
