@@ -20,10 +20,23 @@ services:
       HASURA_GRAPHQL_DATABASE_URL: postgres://itmahesh:Mahesh_23@postgres:5432/mydatabase
       HASURA_GRAPHQL_ADMIN_SECRET: Mahesh_23
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
-  react:
+  react-prod:
     build:
       context: ./frontend/react
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.prod
     ports:
       - "3000:80"
     restart: always
+  react-dev:
+    build:
+      context: ./frontend/react
+      dockerfile: Dockerfile.dev
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend/react:/app
+      - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    stdin_open: true
+    tty: true
