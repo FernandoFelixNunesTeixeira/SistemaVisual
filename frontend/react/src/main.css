@@ -1,3 +1,22 @@
+/* Color Variables Definition */
+:root {
+  --primary: #38B6FF;
+  --secondary: #A5DEFF;
+  --background: #F8F8FF;
+  --tertiary-1: #FF0000;
+  --tertiary-2: #0097B2;
+
+  --success-green: #4CAF50;
+  --alert-red: #e63946;
+
+  --light-gray: #f5f8fa;
+  --medium-gray: #a1a5b7;
+  --dark-gray: #3f4254;
+  --text-gray: #5e6278;
+  --white: #ffffff;
+  --card-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
+}
+
 /* Background Predefinitions */
 
 body {
