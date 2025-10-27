@@ -13,7 +13,7 @@ const Header = () => {
       <div className="header-middle">
       </div>
 
-      <div className="header-right justify-content-center align-items-center gap-5">
+      <div className="header-right justify-content-center align-items-center mx-3 gap-5">
         <div className="d-flex flex-row align-items-center gap-5">
           <h5><a href="#">Screen1</a></h5>
           <h5><a href="#">Screen2</a></h5>
