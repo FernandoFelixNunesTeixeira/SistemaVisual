@@ -27,11 +27,13 @@ h3 {
 
 h4 {
   font-size: 28px;
+  font-weight: 300;
   font-family: 'Poppins';
 }
 
 h5 {
   font-size: 24px;
+  font-weight: 300;
   font-family: 'Poppins';
 }
 
@@ -47,6 +49,7 @@ body {
 
 p {
   font-size: 16px;
+  font-weight: 200;
   font-family: 'Poppins';
 }
 
@@ -65,3 +68,37 @@ button {
   font-size: 10px;
   font-family: 'Poppins';
 }
+
+/* Centralization */
+.three-part-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+}
+
+.header-middle {
+  text-align: center;
+}
+
+.header-right {
+  display: flex;
+  flex-direction: row;
+  text-align: right;
+}
+
+@media (max-width: 768px) {
+  .three-part-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .header-left,
+  .header-middle,
+  .header-right {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+

@@ -4,14 +4,14 @@ import "./Footer.css";
 
 const Footer = () => {
   return (
-    <div class="top-footer">
-        <div class="d-flex flex-row align-items-center justify-content-center p-3 gap-5">
-            <h4><a href="#">Contato</a></h4>
-            <h4><a href="#">Sobre</a></h4>
-            <h4><a href="#">Termos de Uso</a></h4>
+    <div className="top-footer">
+        <div className="d-flex flex-row align-items-center justify-content-center p-3 gap-5">
+            <h5><a href="#">Contato</a></h5>
+            <h5><a href="#">Sobre</a></h5>
+            <h5><a href="#">Termos de Uso</a></h5>
         </div>
 
-        <footer class="d-flex flex-column align-items-center justify-content-center">
+        <footer className="d-flex flex-column align-items-center justify-content-center">
             <p>Copyright © Student CellVision; All rights reserved.</p>
         </footer>
     </div>
