@@ -1,0 +1,84 @@
+/* --- Profile Card and Buttons --- */
+
+.profile-card {
+  padding-top: 50px;
+}
+
+.profile-pic-container {
+  margin-top: -100px;
+  width: 100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.profile-pic-bg {
+  width: 100px;
+  height: 100px;
+  background-color: var(--tertiary-2); 
+  border: 4px solid var(--white); 
+}
+
+.btn-icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.exit-btn {
+  width: 38px;
+  height: 38px;
+  z-index: 10;
+}
+
+.edit-pic-btn {
+  bottom: 5px;
+  right: 5px;
+  width: 28px;
+  height: 28px;
+}
+
+.profile-card .card-body {
+  padding-top: 1rem;
+}
+
+.form-check-input:checked {
+  background-color: var(--tertiary-2); 
+  border-color: var(--tertiary-2);
+}
+
+.form-check-label {
+  color: var(--text-gray);
+}
+
+.notification-switch-bg {
+  background-color: var(--light-gray);
+}
+
+
+/* --- Table Minhas Salas --- */
+
+.salas-card-header {
+  background-color: var(--primary); 
+  color: var(--white);
+}
+
+.salas-card .table {
+  border-style: none;
+}
+
+.salas-card .table td {
+  padding: 1rem 1.25rem;
+  border-top: 1px solid var(--light-gray); 
+}
+
+.salas-card .table tr:first-child td {
+  border-top: none;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+  --bs-table-accent-bg: var(--light-gray); 
+  color: var(--bs-table-striped-color);
+}
