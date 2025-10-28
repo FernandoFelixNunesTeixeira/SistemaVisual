@@ -84,3 +84,15 @@ button {
   font-size: 10px;
   font-family: 'Poppins';
 }
+
+/* --- Router Outlet Fill Page (Header/Outlet/Footer) --- */
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; 
+}
+
+.main-content {
+  flex-grow: 1; 
+  overflow-y: auto; 
+}

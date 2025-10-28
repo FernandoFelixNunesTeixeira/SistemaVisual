@@ -7,7 +7,8 @@ import TermOfUse from "./pages/TermOfUse.jsx";
 import Contact from "./pages/Contact.jsx";
 import About from "./pages/About.jsx";
 import User from "./pages/User.jsx";
-import AlertDashboard from "./pages/AlertDashboard.jsx";
+import AlertDashboard from "./pages/Alerts/AlertDashboard.jsx";
+import './main.css';
 
 const isAuthenticated = () => {
     return true; // TO-DO: GETS AUTHENTICAITON TOKEN FROM API OR LOCALSTORAGE
@@ -17,13 +18,14 @@ const ProtectedRoute = ({ children }) => {
     if (!isAuthenticated()) {
         return <Navigate to="/login" replace />;
     }
-    return <div className="wrapper">
+    return (
+    <div className="wrapper">
       <Header />
       <main className="main-content">
         <Outlet />
       </main>
       <Footer />
-    </div>;
+    </div>);
 };
 
 const router = createBrowserRouter([
