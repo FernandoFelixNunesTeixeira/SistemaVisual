@@ -99,15 +99,15 @@ function AlertDashboard() {
         <div className="alert-dashboard-container py-5">
             <div className="alert-main-card">
                 <div className="alert-header">
-                    <h3>Alertas em Tempo-Real</h3>
+                    <h3><strong><i className="bi bi-globe"></i></strong>&nbsp;&nbsp;&nbsp;Alertas em Tempo-Real</h3>
                 </div>
 
                 <div className="alert-body">
                     <div className="alert-filters">
                         <div className="filter-buttons">
-                            <button type="button" className={`filter-btn ${filter === '' ? 'active' : ''}`} onClick={() => handleFilterChange('')}>TODOS</button>
-                            <button type="button" className={`filter-btn ${filter === 'Novo' ? 'active' : ''}`} onClick={() => handleFilterChange('Novo')}>NOVOS</button>
-                            <button type="button" className={`filter-btn ${filter === 'Pendente' ? 'active' : ''}`} onClick={() => handleFilterChange('Pendente')}>PENDENTES</button>
+                            <button type="button" className={`filter-btn ${filter === '' ? 'active' : ''}`} onClick={() => handleFilterChange('')}><strong><i className="bi bi-database"></i></strong>&nbsp;&nbsp;&nbsp;TODOS</button>
+                            <button type="button" className={`filter-btn ${filter === 'Novo' ? 'active' : ''}`} onClick={() => handleFilterChange('Novo')}><strong><i className="bi bi-newspaper"></i></strong>&nbsp;&nbsp;&nbsp;NOVOS</button>
+                            <button type="button" className={`filter-btn ${filter === 'Pendente' ? 'active' : ''}`} onClick={() => handleFilterChange('Pendente')}><strong><i className="bi bi-exclamation-circle-fill"></i></strong>&nbsp;&nbsp;&nbsp;PENDENTES</button>
                         </div>
                         <span className="active-alerts-text">{totalItems} Alertas Ativos</span>
                     </div>

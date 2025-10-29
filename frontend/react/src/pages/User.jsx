@@ -10,7 +10,8 @@ function User() {
                     <div className="card profile-card position-relative border-0 shadow-sm rounded-4">
 
                         <button type="button" className="btn btn-light btn-icon exit-btn position-absolute top-0 start-0 translate-middle rounded-circle shadow-sm">
-                            <img src="https://api.iconify.design/ph/sign-out-bold.svg?color=%23009ef7&width=20&height=20" alt="Sair" />
+                            <a href="./login"><img src="https://api.iconify.design/ph/sign-out-bold.svg?color=%23009ef7&width=20&height=20" alt="Sair" />
+                            </a>
                         </button>
 
                         <div className="profile-pic-container position-relative">
