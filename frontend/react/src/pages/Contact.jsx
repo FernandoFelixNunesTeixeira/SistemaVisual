@@ -1,3 +1,4 @@
+//Página com função para contato
 import React, { useState } from "react";
 
 const Contact = () => {

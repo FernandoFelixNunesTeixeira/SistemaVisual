@@ -1,5 +1,6 @@
 import "./About.css";
 
+//Pagina Sobre na qual serão descritas as funcionalidades do site
 function About() {
     return (
         <div className="d-flex flex-column m-5">

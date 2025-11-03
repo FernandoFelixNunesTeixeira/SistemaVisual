@@ -3,6 +3,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import Logo from '@/assets/logo.svg';
 import "./Header.css";
 
+// Cabeçalho com Logo, e link para as páginas Home e Painel (Página de Monitoramento)
 const Header = () => {
   return (
     <header className="three-part-header">

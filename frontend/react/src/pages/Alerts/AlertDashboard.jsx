@@ -1,9 +1,7 @@
 import { useState, useMemo, use } from 'react';
 import './AlertDashboard.css';
 
-// TO-DO: Design - Ao alterar pagina os botoes de pagina se mexem, o ideal seria um espaco fixo independente de quantos card estiver na lista
-// TO-DO: Substituir por chamada de endpoint API que retorne uma lista de alertas real
-// TO-DO: Add data junto com Time para poder filtrar por dia (Estou pensando em Novo como todos dentro do dia, talvez possa ser mudado para todos dentro de x horas)
+//Lista de alertas teste
 const DATA_TEST = [
     { id: 1, time: '10:42', location: 'Sala 201', status: 'NOVO' },
     { id: 2, time: '10:46', location: 'Sala 202', status: 'PENDENTE' },
@@ -11,6 +9,7 @@ const DATA_TEST = [
     { id: 4, time: '11:15', location: 'Sala 204', status: 'PENDENTE' },
     { id: 5, time: '11:30', location: 'Sala 205', status: 'NOVO' },
 ]
+//Obter data atual
 const getTodayString = () => new Date().toDateString();
 
 /**
@@ -21,10 +20,9 @@ const getTodayString = () => new Date().toDateString();
 export const usePaginationAndFilter = (initialList = [], itemsPerPage = 10) => {
     const [currentPage, setCurrentPage] = useState(1); // Página atual
     const [filter, setFilter] = useState('');       // Filtro atual
-    const [itemsPerPageState, setItemsPerPage] = useState(itemsPerPage);
-
+    const [itemsPerPageState, setItemsPerPage] = useState(itemsPerPage); //Valor do estado itemsPerPageState é inicializado com o valor de itemsPerPage
+                                                                         //itemsPerPageState, sofre atualizações através da função setItemsPerPage
     // Uso de Memoization nas funcoes abaixo para recalcular a lista apenas quando ter alteração na lista ou filtro
-
     const filteredList = useMemo(() => {
         if (filter === '') return initialList;
         return initialList.filter(item => item.status === filter);
@@ -41,7 +39,7 @@ export const usePaginationAndFilter = (initialList = [], itemsPerPage = 10) => {
     }, [filteredList, currentPage, itemsPerPageState]);
 
     const handleFilterChange = (newFilter) => {
-        setFilter(newFilter);
+        setFilter(newFilter); 
         setCurrentPage(1); // Volta para primeira pagina ao mudar filtro
     };
 
@@ -81,8 +79,8 @@ function AlertDashboard() {
         handleFilterChange,
         handlePageChange,
     } = usePaginationAndFilter(DATA_TEST, 3);
+    
     // OPCIONAL TO-DO: Permitir que usuario selecione quantos items por página ou calcular com base na tela
-
     const filterCalculation = useMemo(() => {
         const todayString = getTodayString();
 
@@ -95,6 +93,8 @@ function AlertDashboard() {
 
     const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
 
+    // Retorna um dashboard contendo um cabeçalho escrito alertas em tempo-real, no qual é possível ver as abas todos os alertas,
+    // novos alertas e alertas pendentes
     return (
         <div className="alert-dashboard-container py-5">
             <div className="alert-main-card">
