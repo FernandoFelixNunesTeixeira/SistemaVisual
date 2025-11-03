@@ -1,3 +1,4 @@
+//Página com função para contato
 function Contact() {
     return (
         <div>

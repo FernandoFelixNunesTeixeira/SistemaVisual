@@ -1,5 +1,8 @@
 import './User.css';
 
+//Tela User, no qual é mostrado o perfil de usuário, um botão em que o usuário informa
+//se aceita receber notificações por email, botão de sair para voltar para a tela de login
+//E seu conjunto de salas de aula e horários
 function User() {
     return (
         <div className="container user-profile-page py-5">

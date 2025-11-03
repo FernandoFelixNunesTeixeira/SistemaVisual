@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "./Footer.css";
-
+//Rodapé contendo links para página de contato, página sobre e página de termos de uso, além de direitos autorais
 const Footer = () => {
   return (
     <div className="top-footer">

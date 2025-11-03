@@ -3,7 +3,9 @@ import Header from "../components/Header";
 import Blank from "../components/Blank";
 import { Link } from "react-router-dom";
 
+//Página Principal
 function Home() {
+    //Retorna Painel do Administrador, contendo cards para gerenciar fiscais, gerenciar alunos e gerenciar alunos
     return (
         <div>
             <div className="container mt-5">

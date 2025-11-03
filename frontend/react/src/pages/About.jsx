@@ -1,3 +1,4 @@
+//Pagina Sobre na qual serão descritas as funcionalidades do site
 function About() {
     return (
         <div>

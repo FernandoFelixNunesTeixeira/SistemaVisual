@@ -2,6 +2,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./login.css";
 
+//Tela de login, onde é capturado usuário e senha
+//Onde será realizado as verificações necessárias 
+//para saber se o usuário pode prosseguir
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
