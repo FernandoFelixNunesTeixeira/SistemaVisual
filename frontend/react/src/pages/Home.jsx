@@ -1,6 +1,5 @@
-import Footer from "../components/Footer";
-import Header from "../components/Header";
-import Blank from "../components/Blank";
+import Footer from "../components/Footer/Footer";
+import Header from "../components/Header/Header";
 import { Link } from "react-router-dom";
 
 function Home() {

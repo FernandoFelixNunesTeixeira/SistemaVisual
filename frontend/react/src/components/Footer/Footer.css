@@ -4,21 +4,25 @@ footer {
     max-height: 100%;
 }
 
-h5 {
+footer h5 {
     color: white;
     margin: 0px;
 }
 
-p {
+footer p {
     color: white;
     margin: 0px;
 }
 
-.top-footer {
+footer .top-footer {
     background-color: #38B6FF;
 }
 
-a {
+footer a {
   color: inherit;
   text-decoration: none;
+}
+
+footer .top {
+    background-color: #38B6FF;
 }

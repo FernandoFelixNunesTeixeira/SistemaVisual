@@ -1,6 +1,6 @@
 import { createBrowserRouter, Navigate, Outlet } from "react-router-dom";
-import Header from "./components/Header.jsx";
-import Footer from "./components/Footer.jsx";
+import Header from "./components/Header/Header.jsx";
+import Footer from "./components/Footer/Footer.jsx";
 import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
 import TermOfUse from "./pages/TermOfUse.jsx";
@@ -34,10 +34,6 @@ const router = createBrowserRouter([
         element: <Login />
     },
     {
-        path: "/terms-of-use",
-        element: <TermOfUse />
-    },
-    {
         element: <ProtectedRoute />,
         children: [
             {
@@ -51,6 +47,10 @@ const router = createBrowserRouter([
             {
                 path: "/about",
                 element: <About />,
+            },
+            {
+                path: "/terms-of-use",
+                element: <TermOfUse />
             },
             {
                 path: "/user",

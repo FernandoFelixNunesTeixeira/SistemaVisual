@@ -20,7 +20,7 @@
 /* Background Predefinitions */
 
 body {
-    background-color: #F8F8FF;
+    background-color: var(--background);
     min-height: 100px;
     margin: 0;
 }
@@ -68,7 +68,7 @@ body {
 
 p {
   font-size: 16px;
-  font-weight: 200;
+  font-weight: 300;
   font-family: 'Poppins';
 }
 
