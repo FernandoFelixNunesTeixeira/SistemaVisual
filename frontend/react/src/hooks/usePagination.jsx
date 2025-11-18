@@ -2,11 +2,14 @@ import { useState, useMemo } from 'react';
 
 /**
  * Paginação
- * @param {number} itemsPerPage - Num de items por página
+ * @param {Array<any>} list - Lista
+ * @param {number} initialItemsPerPage - Num de itens por página
  */
-export const usePagination = (itemsPerPage = 10) => {
-    const [currentPage, setCurrentPage] = useState(1); // Página atual
-    const [itemsPerPageState, setItemsPerPage] = useState(10);
+export const usePagination = (list = [], initialItemsPerPage = 10) => {
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage, setItemsPerPage] = useState(initialItemsPerPage);
+
+    const totalItems = list.length;
 
     const totalPages = useMemo(() => {
         return Math.ceil(totalItems / itemsPerPage);
@@ -16,7 +19,7 @@ export const usePagination = (itemsPerPage = 10) => {
         const startIndex = (currentPage - 1) * itemsPerPage;
         const endIndex = startIndex + itemsPerPage;
         return list.slice(startIndex, endIndex);
-    }, [list, currentPage, itemsPerPageState]);
+    }, [list, currentPage, itemsPerPage]);
 
     const handlePageChange = (newPage) => {
         if (newPage >= 1 && newPage <= totalPages) {
@@ -25,7 +28,7 @@ export const usePagination = (itemsPerPage = 10) => {
     };
 
     const handleItemsPerPageChange = (newSize) => {
-        setItemsPerPage(newSize);
+        setItemsPerPage(Number(newSize));
         setCurrentPage(1);
     };
 
@@ -33,10 +36,10 @@ export const usePagination = (itemsPerPage = 10) => {
         paginatedList,
         currentPage,
         totalPages,
+        totalItems,
+        itemsPerPage,
 
         handlePageChange,
         handleItemsPerPageChange,
-        
-        itemsPerPage: itemsPerPageState,
     };
-}
+};

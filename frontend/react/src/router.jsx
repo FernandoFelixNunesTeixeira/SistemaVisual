@@ -8,7 +8,7 @@ import Contact from "./pages/Contact.jsx";
 import About from "./pages/About.jsx";
 import User from "./pages/User.jsx";
 import AlertDashboard from "./pages/Alerts/AlertDashboard.jsx";
-import GerenciamentoAlunos from "./pages/Gerenciamento/Alunos/GerenciamentoAlunos.jsx";
+import ListAlunos from "./pages/Gerenciamento/Alunos/ListAlunos.jsx";
 import './main.css';
 
 const isAuthenticated = () => {
@@ -63,7 +63,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/students",
-                element: <GerenciamentoAlunos />,
+                element: <ListAlunos />,
             }
         ],
     },
