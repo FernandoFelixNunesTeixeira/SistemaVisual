@@ -1,0 +1,1 @@
+from .aluno_repository import AlunoRepository

@@ -3,23 +3,32 @@ services:
     image: postgres:latest
     restart: always
     environment:
-      POSTGRES_USER: itmahesh
-      POSTGRES_PASSWORD: Mahesh_23
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
       POSTGRES_DB: mydatabase
     ports:
       - "5432:5432"
-  hasura:
-    image: hasura/graphql-engine:latest
-    depends_on:
-      - postgres
-    ports:
-      - "8080:8080"
-    restart: always
-    environment:
-      HASURA_GRAPHQL_DATABASE_URL: postgres://itmahesh:Mahesh_23@postgres:5432/mydatabase
-      HASURA_GRAPHQL_ADMIN_SECRET: Mahesh_23
-      HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
-      HASURA_GRAPHQL_JWT_SECRET: '{ "type": "HS256", "key": "oursupersecretsupersecurekey1234567890" }'
+    volumes:
+      - postgres_data:/var/lib/postgresql
+      - ./backend/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d mydatabase"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  #hasura:
+  #  image: hasura/graphql-engine:latest
+  #  depends_on:
+  #    - postgres
+  #  ports:
+  #    - "8080:8080"
+  #  restart: always
+  #  environment:
+  #    HASURA_GRAPHQL_DATABASE_URL: postgres://itmahesh:Mahesh_23@postgres:5432/mydatabase
+  #    HASURA_GRAPHQL_ADMIN_SECRET: Mahesh_23
+  #    HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
+  #    HASURA_GRAPHQL_JWT_SECRET: '{ "type": "HS256", "key": "oursupersecretsupersecurekey1234567890" }'
   react-prod:
     build:
       context: ./frontend/react
@@ -52,3 +61,7 @@ services:
     environment:
       - FLASK_ENV=development
     command: python app.py
+
+volumes:
+  postgres_data:
+

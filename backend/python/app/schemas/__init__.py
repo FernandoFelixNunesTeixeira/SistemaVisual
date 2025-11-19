@@ -1,0 +1,1 @@
+from .aluno_schema import CreateAlunoRequest, AlunoResponse

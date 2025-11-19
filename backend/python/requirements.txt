@@ -2,3 +2,10 @@ flask==3.0.3
 argon2-cffi
 requests
 pyjwt
+Flask-SQLAlchemy
+pydantic
+pydantic[email]
+setuptools
+flasgger==0.9.7b2
+flask-cors
+psycopg2-binary
