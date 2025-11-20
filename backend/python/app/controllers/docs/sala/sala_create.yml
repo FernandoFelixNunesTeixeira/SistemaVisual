@@ -1,0 +1,24 @@
+tags:
+  - Sala
+summary: "Criar uma sala"
+consumes:
+  - application/json
+parameters:
+  - in: body
+    name: body
+    required: true
+    schema:
+      type: object
+      properties:
+        nomeSala:
+          type: string
+          example: "C3"
+      required:
+        - nomeSala
+responses:
+  201:
+    description: "Sala criada"
+    schema:
+      $ref: '#/definitions/Sala'
+  400:
+    description: "Requisição inválida"

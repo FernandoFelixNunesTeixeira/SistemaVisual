@@ -30,7 +30,7 @@ def create_app():
         "title": "API",
         "uiversion": 3,
     }
-    Swagger(app, template_file="docs/salas.yml")
+    Swagger(app, template_file="app/controllers/docs/swagger.yml")
 
     app.register_blueprint(aluno_bp, url_prefix="/api/alunos")
     app.register_blueprint(sala_bp, url_prefix="/api/salas")
