@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./login.css";
+import ReCAPTCHA from "react-google-recaptcha"
 
 //Tela de login, onde é capturado usuário e senha
 //Onde será realizado as verificações necessárias 
@@ -9,6 +10,15 @@ function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+
+  //Definir status do recaptcha
+  const [captchaStatus, setCaptchaStatus] = useState(false);
+  //Definir status da chave
+  const [key, setKey] = useState('');
+  const onSucess = (value) => {
+    console.log(value)
+    setCaptchaStatus(true);
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -54,6 +64,10 @@ function Login() {
             />
             <label htmlFor="password">Senha</label>
           </div>
+          <ReCAPTCHA
+            sitekey="6LfsVhIsAAAAAAKxE4bDSyeB_L2w-iEgPJcVtAlZ"
+            onChange={onSucess}
+          />
           <div className="text-start mb-4">
             <a href="#" className="link-secondary text-decoration-none small">Esqueci minha senha</a>
           </div>
