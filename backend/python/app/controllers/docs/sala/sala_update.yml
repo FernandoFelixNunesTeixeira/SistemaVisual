@@ -1,0 +1,21 @@
+tags:
+  - Sala
+summary: "Atualizar sala pelo ID"
+parameters:
+  - name: id
+    in: path
+    required: true
+    type: integer
+    description: "ID da sala a ser atualizada"
+  - in: body
+    name: body
+    required: true
+    schema:
+      $ref: '#/definitions/SalaUpdate'
+responses:
+  200:
+    description: "Sala atualizada com sucesso"
+    schema:
+      $ref: '#/definitions/Sala'
+  404:
+    description: "Sala não encontrada"

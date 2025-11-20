@@ -1,0 +1,11 @@
+tags:
+  - Sala
+summary: "Listar todas as salas"
+description: "Retorna a lista de salas cadastradas."
+responses:
+  200:
+    description: "Lista de salas retornada com sucesso"
+    schema:
+      type: array
+      items:
+        $ref: '#/definitions/Sala'

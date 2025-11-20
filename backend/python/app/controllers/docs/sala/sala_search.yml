@@ -1,0 +1,17 @@
+tags:
+  - Sala
+summary: "Buscar sala pelo ID"
+description: "Retorna uma sala específica pelo seu ID."
+parameters:
+  - name: id
+    in: path
+    required: true
+    type: integer
+    description: "ID da sala a ser recuperada"
+responses:
+  200:
+    description: "Sala encontrada"
+    schema:
+      $ref: '#/definitions/Sala'
+  404:
+    description: "Sala não encontrada"

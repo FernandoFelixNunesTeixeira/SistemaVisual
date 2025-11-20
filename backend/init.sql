@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS aluno (
 CREATE TABLE IF NOT EXISTS sala (
   id BIGINT NOT NULL,
   nomeSala VARCHAR(3) NULL,
-  PRIMARY KEY (id))
+  PRIMARY KEY (id));
 
 CREATE TABLE IF NOT EXISTS turmas (
   id INT NOT NULL,
@@ -23,9 +23,8 @@ CREATE TABLE IF NOT EXISTS turmas (
     FOREIGN KEY (horarios_id)
     REFERENCES horarios (id)
     ON DELETE SET NULL
-    ON UPDATE CASCADE)
-
-  PRIMARY KEY (id))
+    ON UPDATE CASCADE,
+  PRIMARY KEY (id));
 
 CREATE TABLE IF NOT EXISTS horarios (
   id VARCHAR(9) NOT NULL,
@@ -33,7 +32,7 @@ CREATE TABLE IF NOT EXISTS horarios (
   hora_inicio TIME NOT NULL,
   dia_semana VARCHAR(20) NOT NULL,
   PRIMARY KEY (id)
-)
+);
 
 CREATE TABLE IF NOT EXISTS notificacoes (
   id BIGINT NOT NULL,
@@ -51,7 +50,7 @@ CREATE TABLE IF NOT EXISTS notificacoes (
     FOREIGN KEY (turmas_id)
     REFERENCES turmas (id)
     ON DELETE SET NULL
-    ON UPDATE CASCADE)
+    ON UPDATE CASCADE);
 
 CREATE TABLE IF NOT EXISTS turmas_has_aluno (
   turmas_id INT NOT NULL,
@@ -66,7 +65,7 @@ CREATE TABLE IF NOT EXISTS turmas_has_aluno (
     FOREIGN KEY (aluno_matricula)
     REFERENCES aluno (matricula)
     ON DELETE SET NULL
-    ON UPDATE CASCADE)
+    ON UPDATE CASCADE);
 
 CREATE TABLE IF NOT EXISTS turmas_has_sala_aula (
   turmas_id INT NOT NULL,
@@ -81,7 +80,7 @@ CREATE TABLE IF NOT EXISTS turmas_has_sala_aula (
     FOREIGN KEY (sala_aula_id)
     REFERENCES sala_aula (id)
     ON DELETE SET NULL
-    ON UPDATE CASCADE)
+    ON UPDATE CASCADE);
 
 CREATE TABLE IF NOT EXISTS docentes (
   matricula VARCHAR(9) NOT NULL,
@@ -90,7 +89,7 @@ CREATE TABLE IF NOT EXISTS docentes (
   email VARCHAR(50) NOT NULL,
   foto VARCHAR(45) NULL,
   coordenador INT NOT NULL,
-  PRIMARY KEY (matricula))
+  PRIMARY KEY (matricula));
 
 CREATE TABLE IF NOT EXISTS professor_has_turmas (
   professor_matricula VARCHAR(9) NOT NULL,
@@ -105,7 +104,7 @@ CREATE TABLE IF NOT EXISTS professor_has_turmas (
     FOREIGN KEY (turmas_id)
     REFERENCES turmas (id)
     ON DELETE SET NULL
-    ON UPDATE CASCADE)
+    ON UPDATE CASCADE);
 
 CREATE TABLE IF NOT EXISTS notificacoes_has_docentes (
   notificacoes_id BIGINT NOT NULL,
@@ -121,4 +120,4 @@ CREATE TABLE IF NOT EXISTS notificacoes_has_docentes (
     FOREIGN KEY (docentes_matricula)
     REFERENCES docentes (matricula)
     ON DELETE SET NULL
-    ON UPDATE CASCADE)
+    ON UPDATE CASCADE);

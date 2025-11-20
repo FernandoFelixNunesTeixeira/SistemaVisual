@@ -1,0 +1,13 @@
+swagger: "2.0"
+info:
+  title: API Salas
+definitions:
+  Sala:
+    type: object
+    properties:
+      id:
+        type: integer
+        example: 1
+      nomeSala:
+        type: string
+        example: "Sala A"

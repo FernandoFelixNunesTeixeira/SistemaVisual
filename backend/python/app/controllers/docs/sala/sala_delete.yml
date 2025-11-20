@@ -1,0 +1,16 @@
+tags:
+  - Sala
+summary: "Deletar uma sala"
+parameters:
+  - name: id
+    in: path
+    required: true
+    type: integer
+    description: "ID da sala a deletar"
+responses:
+  201:
+    description: "Sala deletada com sucesso"
+    schema:
+      $ref: '#/definitions/Sala'
+  404:
+    description: "Sala não encontrada"
