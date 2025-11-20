@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:0000/api/..."; 
+const API_URL = "http://127.0.0.1:5000/api/alunos"; 
 
 export const getAlunos = async () => {
   return axios.get(API_URL);
@@ -14,7 +14,7 @@ export const getAlunoById = async (id) => {
 // 🔹 Cadastra um novo aluno
 // (seu endpoint é /api/aluno/cadastro)
 export const createAluno = async (user) => {
-  return axios.post(`${API_URL}/Cadastro`, user);
+  return axios.post(`${API_URL}/`, user);
 };
 
 // 🔹 Atualiza um aluno existente

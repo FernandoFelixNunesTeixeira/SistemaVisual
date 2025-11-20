@@ -17,7 +17,7 @@ class CreateAlunoRequest(BaseModel):
         pattern=MATRICULA_REGEX,
         description="Formato: AA999999X",
     )
-    foto_base64: Optional[str] = None
+    foto: Optional[str] = None
     periodo_de_referencia: str
 
 class AlunoResponse(BaseModel):
