@@ -1,0 +1,131 @@
+info:
+  title: API de Salas
+  version: 1.0.0
+  description: Documentação da API de gerenciamento de salas
+
+paths:
+  /api/salas/:
+    post:
+      tags:
+        - Sala
+      summary: Criar uma nova sala
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nomeSala:
+                  type: string
+                  example: "A1"
+                id:
+                  type: integer
+                  example: 0
+      responses:
+        201:
+          description: Sala criada com sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  nomeSala:
+                    type: string
+                  id:
+                    type: integer
+
+    get:
+      tags:
+        - Sala
+      summary: Listar todas as salas
+      responses:
+        200:
+          description: Lista de salas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    nomeSala:
+                      type: string
+                    id:
+                      type: integer
+
+  /api/salas/{id}:
+    get:
+      tags:
+        - Sala
+      summary: Buscar sala por número
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Sala encontrada
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  nomeSala:
+                    type: string
+                  id:
+                    type: integer
+
+    put:
+      tags:
+        - Sala
+      summary: Atualizar sala existente
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nomeSala:
+                  type: string
+                  example: "B2"
+              required:
+                - nomeSala
+
+      responses:
+        200:
+          description: Sala atualizada com sucesso
+        404:
+          description: Sala não encontrada
+
+    delete:
+      tags:
+        - Sala
+      summary: Deletar sala
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Sala removida
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: Sala removida com sucesso

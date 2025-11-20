@@ -4,6 +4,7 @@ from flask_cors import CORS
 from flasgger import Swagger
 from app.infrastructure.database.db import db
 from app.controllers.aluno_controller import aluno_bp
+from app.controllers.sala_controller import sala_bp
 from pydantic import ValidationError
 
 def create_app():
@@ -29,9 +30,10 @@ def create_app():
         "title": "API",
         "uiversion": 3,
     }
-    Swagger(app)
+    Swagger(app, template_file="docs/salas.yml")
 
     app.register_blueprint(aluno_bp, url_prefix="/api/alunos")
+    app.register_blueprint(sala_bp, url_prefix="/api/salas")
 
     @app.route("/")
     def root():

@@ -1,5 +1,3 @@
-import Footer from "../components/Footer/Footer";
-import Header from "../components/Header/Header";
 import { Link } from "react-router-dom";
 
 //Página Principal
@@ -31,7 +29,7 @@ function Home() {
                     </div>
 
                     <div className="col-md-4">
-                        <Link to="" className="card dashboard-card shadow-sm border-0 rounded-4">
+                        <Link to="/classrooms" className="card dashboard-card shadow-sm border-0 rounded-4">
                             <div className="card-body p-4 d-flex align-items-center">
                                 <img src="https://api.iconify.design/ph/presentation-chart-bold.svg?color=%230dcaf0&width=56&height=56" alt="Home Icons"/>
                                 <span className="ms-4 dashboard-text">GERENCIAR SALAS</span>
