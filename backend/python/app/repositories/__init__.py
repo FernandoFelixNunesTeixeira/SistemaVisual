@@ -1,3 +1,4 @@
 from .aluno_repository import AlunoRepository
 from .sala_repository import SalaRepository
 from .docente_repository import DocenteRepository
+from .notificacao_repository import NotificacaoRepository

@@ -11,6 +11,7 @@ import AlertDashboard from "./pages/Alerts/AlertDashboard.jsx";
 import GerenciamentoAlunos from "./pages/Gerenciamento/Alunos/GerenciamentoAlunos.jsx";
 import './main.css';
 import GerenciamentoSalas from "./pages/Gerenciamento/Salas/GerenciamentoSalas.jsx";
+import Streaming from "./pages/Streaming.jsx";
 
 const isAuthenticated = () => {
     return true; // TO-DO: GETS AUTHENTICAITON TOKEN FROM API OR LOCALSTORAGE
@@ -69,6 +70,10 @@ const router = createBrowserRouter([
             {
                 path: "/classrooms",
                 element: <GerenciamentoSalas />,
+            },
+            {
+                path: "/video",
+                element: <Streaming />
             }
         ],
     },
