@@ -1,6 +1,6 @@
-import './GerenciamentoAlunos.css';
+import '../Gerenciamento.css';
 import { usePagination } from '../../../hooks/usePagination';
-import { createAluno, deleteAluno, getAlunos } from '../../../services/alunosService';
+import { createAluno, deleteAluno, getAlunos, updateAluno } from '../../../services/alunosService';
 import { useState, useEffect } from 'react';
 import ModalNovoAluno from './ModalNovoAluno';
 
@@ -10,23 +10,39 @@ import ModalNovoAluno from './ModalNovoAluno';
 function GerenciamentoAlunos() {
     const [apiData, setApiData] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [updatingStudent, setUpdatingStudent] = useState(null);
 
     useEffect(() => {
         getAlunos().then(res => setApiData(res.data));
     }, []);
 
-    const handleCreateAluno = async (newAlunoData) => {
+    const handleSaveForm = async (formData) => {
         try {
-            await createAluno(newAlunoData); 
+            if (updatingStudent) {
+                await updateAluno(updatingStudent.matricula, formData);
+            } else {
+                await createAluno(formData);
+            }
 
-            const res = await getAlunos(); 
+            const res = await getAlunos();
             setApiData(res.data);
 
-            setIsModalOpen(false); 
+            setIsModalOpen(false);
+            setUpdatingStudent(null); 
         } catch (error) {
             console.error("Erro ao salvar aluno", error);
             alert("Erro ao salvar aluno.");
         }
+    };
+
+    const handleOpenNew = () => {
+        setUpdatingStudent(null);
+        setIsModalOpen(true);
+    };
+
+    const handleOpenUpdate = (student) => {
+        setUpdatingStudent(student);
+        setIsModalOpen(true);
     };
 
     const handleDelete = async (matricula) => {
@@ -49,19 +65,13 @@ function GerenciamentoAlunos() {
 
     const totalRegistros = apiData.length;
 
-    // Substituir por Icones do Bootstrap
-    const iconNovoAluno = `https://api.iconify.design/feather/plus-circle.svg?color=%23FFFFFF&width=18&height=18`;
-    const iconEditar = `https://api.iconify.design/feather/edit.svg?color=%2338B6FF&width=18&height=18`;
-    const iconExcluir = `https://api.iconify.design/feather/trash-2.svg?color=%23FF0000&width=18&height=18`;
-    const iconConcluir = `https://api.iconify.design/feather/check-circle.svg?color=%234CAF50&width=18&height=18`;
-
     return (
-        <div className="student-management-container">
+        <div className="gerenciamento-management-container">
 
-            <div className="student-header">
+            <div className="gerenciamento-header">
                 <h1>Gerenciamento de Alunos</h1>
-                <button onClick={() => setIsModalOpen(true)} className="btn-novo-aluno">
-                    <img src={iconNovoAluno} alt="Novo Aluno" />
+                <button onClick={handleOpenNew} className="btn-novo">
+                    <i className="bi bi-plus-circle" style={{ marginRight: '8px' }}></i>
                     NOVO ALUNO
                 </button>
             </div>
@@ -69,7 +79,9 @@ function GerenciamentoAlunos() {
             <ModalNovoAluno
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
-                onSave={handleCreateAluno} />
+                onSave={handleSaveForm}
+                alunoParaAtualizar={updatingStudent}
+            />
 
             <div className="table-controls">
                 <div className="show-entries">
@@ -84,33 +96,32 @@ function GerenciamentoAlunos() {
             </div>
 
             <div className="table-card">
-                <table className="student-table">
+                <table className="gerenciamento-table">
                     <thead>
                         <tr>
                             <th>Nome</th>
-                            <th>Prontuário</th>
+                            <th>Matricula</th>
                             <th>E-mail</th>
                             <th>Telefone</th>
+                            <th>Periodo</th>
                             <th>Ação</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {paginatedList.map((apiData, index) => (
+                        {paginatedList.map((student, index) => (
                             <tr key={index}>
-                                <td>{apiData.nome}</td>
-                                <td>{apiData.matricula}</td>
-                                <td>{apiData.email}</td>
-                                <td>{apiData.telefone}</td>
+                                <td>{student.nome}</td>
+                                <td>{student.matricula}</td>
+                                <td>{student.email}</td>
+                                <td>{student.telefone}</td>
+                                <td>{student.periodo_de_referencia}</td>
                                 <td>
                                     <div className="action-buttons">
-                                        <button className="action-btn edit" title="Editar">
-                                            <img src={iconEditar} alt="Editar" />
+                                        <button onClick={() => handleOpenUpdate(student)} className="action-btn edit" title="Editar">
+                                            <i className="bi bi-pencil-square" style={{ color: '#38B6FF', fontSize: '1.2rem' }}></i>
                                         </button>
-                                        <button onClick={() => handleDelete(apiData.matricula)} className="action-btn delete" title="Excluir">
-                                            <img src={iconExcluir} alt="Excluir" />
-                                        </button>
-                                        <button  className="action-btn check" title="Concluir">
-                                            <img src={iconConcluir} alt="Concluir" />
+                                        <button onClick={() => handleDelete(student.matricula)} className="action-btn delete" title="Excluir">
+                                            <i className="bi bi-trash" style={{ color: '#FF0000', fontSize: '1.2rem' }}></i>
                                         </button>
                                     </div>
                                 </td>
@@ -122,7 +133,7 @@ function GerenciamentoAlunos() {
                             length: Math.max(0, itemsPerPage - paginatedList.length)
                         }).map((_, index) => (
                             <tr key={`placeholder-${index}`} style={{ height: '62px' }}>
-                                <td></td><td></td><td></td><td></td><td></td>
+                                <td></td><td></td><td></td><td></td><td></td><td></td>
                             </tr>
                         ))}
                     </tbody>

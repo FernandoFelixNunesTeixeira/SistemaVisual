@@ -1,10 +1,7 @@
-import React, { useState } from 'react';
-import './ModalNovoAluno.css';
+import React, { useState, useEffect } from 'react';
+import '../ModalNovo.css';
 
-const iconSalvar = `https://api.iconify.design/feather/save.svg?color=%23FFFFFF&width=18&height=18`;
-const iconFechar = `https://api.iconify.design/feather/x.svg?color=%235e6278&width=24&height=24`;
-
-const ModalNovoAluno = ({ isOpen, onClose, onSave }) => {
+const ModalFormAluno = ({ isOpen, onClose, onSave, alunoParaAtualizar }) => {
     const initialFormState = {
         nome: '',
         matricula: '',
@@ -14,6 +11,16 @@ const ModalNovoAluno = ({ isOpen, onClose, onSave }) => {
     };
 
     const [formData, setFormData] = useState(initialFormState);
+
+    useEffect(() => {
+        if (isOpen) {
+            if (alunoParaAtualizar) {
+                setFormData({...initialFormState, ...alunoParaAtualizar});
+            } else {
+                setFormData(initialFormState);
+            }
+        }
+    }, [isOpen, alunoParaAtualizar]);
 
     if (!isOpen) return null;
 
@@ -28,17 +35,17 @@ const ModalNovoAluno = ({ isOpen, onClose, onSave }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         onSave(formData);
-        setFormData(initialFormState);
-        onClose();
     };
+
+    const isUpdateMode = !!alunoParaAtualizar;
 
     return (
         <div className="modal-overlay">
             <div className="modal-container">
                 <div className="modal-header">
-                    <h3>Novo Aluno</h3>
-                    <button className="btn-close-modal" onClick={onClose}>
-                        <img src={iconFechar} alt="Fechar" />
+                    <h3>{isUpdateMode ? 'Editar Aluno' : 'Novo Aluno'}</h3>
+                    <button className="btn-close-modal" onClick={onClose} title="Fechar">
+                        <i className="bi bi-x-lg" style={{ fontSize: '1.2rem' }}></i>
                     </button>
                 </div>
 
@@ -68,7 +75,8 @@ const ModalNovoAluno = ({ isOpen, onClose, onSave }) => {
                             required
                         />
                     </div>
-                    <div className="form-group ">
+
+                    <div className="form-group">
                         <label htmlFor="telefone">Telefone</label>
                         <input
                             type="tel"
@@ -83,7 +91,7 @@ const ModalNovoAluno = ({ isOpen, onClose, onSave }) => {
 
                     <div className="form-row">
                         <div className="form-group half">
-                            <label htmlFor="matricula">Matricula</label>
+                            <label htmlFor="matricula">Matrícula</label>
                             <input
                                 type="text"
                                 id="matricula"
@@ -92,12 +100,14 @@ const ModalNovoAluno = ({ isOpen, onClose, onSave }) => {
                                 onChange={handleChange}
                                 placeholder="Ex: PC123456"
                                 required
+                                disabled={isUpdateMode} 
                             />
                         </div>
+
                         <div className="form-group half">
                             <label htmlFor="periodo_de_referencia">Período</label>
                             <input
-                                type="text" // ou type="number"
+                                type="text" 
                                 id="periodo_de_referencia"
                                 name="periodo_de_referencia"
                                 value={formData.periodo_de_referencia}
@@ -113,8 +123,8 @@ const ModalNovoAluno = ({ isOpen, onClose, onSave }) => {
                             CANCELAR
                         </button>
                         <button type="submit" className="btn-save">
-                            <img src={iconSalvar} alt="Salvar" />
-                            SALVAR
+                            <i className={`bi ${isUpdateMode ? 'bi-check-lg' : 'bi-floppy'}`} style={{ marginRight: '8px' }}></i>
+                            {isUpdateMode ? 'ATUALIZAR' : 'SALVAR'}
                         </button>
                     </div>
                 </form>
@@ -123,4 +133,4 @@ const ModalNovoAluno = ({ isOpen, onClose, onSave }) => {
     );
 };
 
-export default ModalNovoAluno;
+export default ModalFormAluno;

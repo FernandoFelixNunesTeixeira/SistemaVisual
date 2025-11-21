@@ -54,6 +54,8 @@ services:
       context: ./backend/python
       dockerfile: Dockerfile
     container_name: flask
+    depends_on:
+      - postgres
     ports:
       - "5000:5000"
     volumes:

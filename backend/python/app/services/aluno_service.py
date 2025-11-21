@@ -1,6 +1,7 @@
 from ..interfaces.aluno_service import IAlunoService
 from ..interfaces.aluno_repository import IAlunoRepository
 from ..entities.aluno import Aluno
+from dataclasses import asdict
 
 class AlunoNotFoundError(Exception):
     pass
@@ -46,6 +47,9 @@ class AlunoService(IAlunoService):
         aluno = self.repo.get_by_matricula(matricula)
         if not aluno:
             raise AlunoNotFoundError(f"Aluno com matrícula '{matricula}' não encontrado para atualização.")
+
+        if not isinstance(dados, dict):
+            dados = asdict(dados)
 
         for campo, valor in dados.items():
             if hasattr(aluno, campo):

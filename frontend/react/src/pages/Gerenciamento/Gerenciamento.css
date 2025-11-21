@@ -1,23 +1,23 @@
-.student-management-container {
+.gerenciamento-management-container {
   width: 90%;
   max-width: 1200px;
   margin: 2rem auto;
 }
 
-.student-header {
+.gerenciamento-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 2rem;
 }
 
-.student-header h1 {
+.gerenciamento-header h1 {
   font-size: 1.75rem;
   font-weight: 600;
   color: var(--dark-gray);
 }
 
-.btn-novo-aluno {
+.btn-novo {
   background-color: var(--primary);
   color: var(--white);
   border: none;
@@ -32,7 +32,7 @@
   transition: background-color 0.2s;
 }
 
-.btn-novo-aluno:hover {
+.btn-novo:hover {
   background-color: var(--tertiary-2);
 }
 
@@ -65,17 +65,17 @@
   overflow: hidden; 
 }
 
-.student-table {
+.gerenciamento-table {
   width: 100%;
   border-collapse: collapse;
 }
 
-.student-table thead tr {
+.gerenciamento-table thead tr {
   background-color: var(--primary);
   color: var(--white);
 }
 
-.student-table th {
+.gerenciamento-table th {
   padding: 1rem 1.5rem;
   text-align: left;
   font-weight: 600;
@@ -83,11 +83,11 @@
   letter-spacing: 0.5px;
 }
 
-.student-table tbody tr:nth-child(even) {
+.gerenciamento-table tbody tr:nth-child(even) {
   background-color: var(--light-gray);
 }
 
-.student-table td {
+.gerenciamento-table td {
   padding: 1rem 1.5rem;
   color: var(--text-gray);
   vertical-align: middle;

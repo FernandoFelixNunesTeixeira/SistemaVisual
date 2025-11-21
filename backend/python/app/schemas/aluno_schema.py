@@ -26,3 +26,4 @@ class AlunoResponse(BaseModel):
     telefone: str
     matricula: str
     foto: Optional[str] = None
+    periodo_de_referencia: str
