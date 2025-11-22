@@ -63,7 +63,23 @@ services:
     environment:
       - FLASK_ENV=development
     command: python app.py
-
+  redis:
+    image: redis:alpine
+    container_name: redis-server
+    restart: always
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes # persistência para não perder dados se container reiniciar
+  redis-commander: # Web-UI
+    image: rediscommander/redis-commander:latest
+    container_name: redis-ui
+    environment:
+      - REDIS_HOSTS=local:redis:6379
+    ports:
+      - "8081:8081"
+    depends_on:
+      - redis
+      
 volumes:
   postgres_data:
 

@@ -1,20 +1,18 @@
-import { useMemo } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import './AlertDashboard.css';
 import usePaginationAndFilter from '../../hooks/usePaginationAndFilter';
-
-//Lista de alertas teste
-const DATA_TEST = [
-    { id: 1, time: '10:42', location: 'Sala 201', status: 'NOVO' },
-    { id: 2, time: '10:46', location: 'Sala 202', status: 'PENDENTE' },
-    { id: 3, time: '11:00', location: 'Sala 203', status: 'NOVO' },
-    { id: 4, time: '11:15', location: 'Sala 204', status: 'PENDENTE' },
-    { id: 5, time: '11:30', location: 'Sala 205', status: 'NOVO' },
-]
+import { getNotificacaoById, getNotificacoes } from '../../services/notificacoesService';
 
 //Obter data atual
 const getTodayString = () => new Date().toDateString();
 
 function AlertDashboard() {
+    const [apiData, setApiData] = useState([]);
+
+    useEffect(() => {
+        getNotificacoes().then(res => setApiData(res.data));
+    }, []);
+
     const {
         paginatedList,
         filter,
@@ -23,15 +21,15 @@ function AlertDashboard() {
         totalItems,
         handleFilterChange,
         handlePageChange,
-    } = usePaginationAndFilter(DATA_TEST, 3);
+    } = usePaginationAndFilter(apiData, 3);
     
     // OPCIONAL TO-DO: Permitir que usuario selecione quantos items por página ou calcular com base na tela
     const filterCalculation = useMemo(() => {
         const todayString = getTodayString();
 
-        const totalAlerts = DATA_TEST.length;
-        const pendingAlerts = DATA_TEST.filter(alert => alert.status === 'PENDING').length;
-        const todayAlerts = DATA_TEST.filter(alert => new Date(alert.date).toDateString() == todayString).length;
+        const totalAlerts = apiData.length;
+        const pendingAlerts = apiData.filter(alert => alert.status === 'PENDING').length;
+        const todayAlerts = apiData.filter(alert => new Date(alert.date).toDateString() == todayString).length;
         
         return { totalAlerts, pendingAlerts, todayAlerts };
     }, []);
@@ -62,7 +60,8 @@ function AlertDashboard() {
                             {paginatedList.length > 0 ? (
                                 paginatedList.map(alert => (
                                     <a href="#" className="alert-item" key={alert.id}>
-                                        <span className="alert-time">{alert.time} – {alert.location}</span>
+                                        {/* TODO IMPORTANTE !!! Formatacao de occurred at */}
+                                        <span className="alert-time">{alert.occurred_at} – {alert.turmas_id}</span>
                                         <span className="alert-arrow">&gt;</span>
                                     </a>
                                 ))
