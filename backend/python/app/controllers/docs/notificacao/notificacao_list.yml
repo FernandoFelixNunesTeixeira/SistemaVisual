@@ -1,0 +1,11 @@
+tags:
+  - Notificacao
+summary: "Listar todas as notificações"
+description: "Retorna a lista de notificações cadastradas."
+responses:
+  200:
+    description: "Lista de notificações retornadas com sucesso"
+    schema:
+      type: array
+      items:
+        $ref: '#/definitions/Notificacao'

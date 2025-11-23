@@ -1,0 +1,16 @@
+tags:
+  - Notificacao
+summary: "Deletar uma Notificação"
+parameters:
+  - name: id
+    in: path
+    required: true
+    type: integer
+    description: "id da notificação a deletar"
+responses:
+  201:
+    description: "Notificação deletada com sucesso"
+    schema:
+      $ref: '#/definitions/Notificacao'
+  404:
+    description: "Notificação não encontrada"

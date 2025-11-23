@@ -11,10 +11,10 @@ parameters:
     name: body
     required: true
     schema:
-      $ref: '#/definitions/HorarioUpdate'
+      $ref: '#/definitions/Horario'
 responses:
   200:
-    description: "horário atualizado com sucesso"
+    description: "Horário atualizado com sucesso"
     schema:
       $ref: '#/definitions/Horario'
   404:

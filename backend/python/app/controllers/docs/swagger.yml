@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  title: API Salas
+  title: API Salas, Horários, notificações, docentes e alunos 
 definitions:
   Sala:
     type: object
@@ -26,3 +26,54 @@ definitions:
       dia_semana:
         type: string
         example: "Segunda-feira"
+  Aluno:
+    type: object
+    properties:
+      matricula:
+        type: string
+        example: "PC7856897"
+      nome:
+          type: string
+          example: "Juliano"
+      telefone:
+          type: string
+          example: "(11) 99999-9999"
+      email:
+          type: string
+          example: "teste@aluno.ifsp.edu.br" 
+      periodo_de_referencia:
+          type: string
+          example: "8º Semestre" 
+  Docente:
+    type: object
+    properties:
+      matricula:
+        type: string
+        example: "PC7856897"
+      nome:
+          type: string
+          example: "Juliano"
+      telefone:
+          type: string
+          example: "(11) 99999-9999"
+      email:
+          type: string
+          example: "teste@aluno.ifsp.edu.br" 
+      coordenador:
+          type: integer
+          example: coordenador" 
+  Notificacao:
+    type: object
+    properties:
+      id:
+        type: integer
+        example: "1"
+      occurred_at:
+          type: time
+          example: ""
+      porcentagem:
+          type: float
+          example: "0.95"
+      turmas_id:
+          type: integer
+          example: "1" 

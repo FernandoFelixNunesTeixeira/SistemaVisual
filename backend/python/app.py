@@ -5,7 +5,9 @@ from flasgger import Swagger
 from app.infrastructure.database.db import db
 from app.controllers.aluno_controller import aluno_bp
 from app.controllers.docente_controller import docente_bp
+from app.controllers.horario_controller import horario_bp
 from app.controllers.sala_controller import sala_bp
+from app.controllers.notificacao_controller import notificacao_bp
 from pydantic import ValidationError
 
 def create_app():
@@ -36,6 +38,8 @@ def create_app():
     app.register_blueprint(aluno_bp, url_prefix="/api/alunos")
     app.register_blueprint(docente_bp, url_prefix="/api/docentes")
     app.register_blueprint(sala_bp, url_prefix="/api/salas")
+    app.register_blueprint(horario_bp, url_prefix="/api/horarios")
+    app.register_blueprint(notificacao_bp, url_prefix="/api/notificacoes")
 
     @app.route("/")
     def root():

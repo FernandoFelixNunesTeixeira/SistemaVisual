@@ -1,0 +1,17 @@
+tags:
+  - Notificacao
+summary: "Buscar notificação pelo id"
+description: "Retorna uma notificação específicada pelo seu id."
+parameters:
+  - name: id
+    in: path
+    required: true
+    type: integer
+    description: "id da notificação a ser recuperada"
+responses:
+  200:
+    description: "Notificacao encontrada"
+    schema:
+      $ref: '#/definitions/Notificacao'
+  404:
+    description: "Notificação não encontrada"

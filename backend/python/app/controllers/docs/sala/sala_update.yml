@@ -11,7 +11,7 @@ parameters:
     name: body
     required: true
     schema:
-      $ref: '#/definitions/SalaUpdate'
+      $ref: '#/definitions/Sala'
 responses:
   200:
     description: "Sala atualizada com sucesso"

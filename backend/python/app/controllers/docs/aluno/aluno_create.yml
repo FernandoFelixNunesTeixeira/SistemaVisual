@@ -1,0 +1,39 @@
+tags:
+  - Aluno
+summary: "Criar um Aluno"
+consumes:
+  - application/json
+parameters:
+  - in: body
+    name: body
+    required: true
+    schema:
+      type: object
+      properties:
+        matricula:
+          type: string
+          example: "PC7856897"
+        nome:
+          type: string
+          example: "Juliano"
+        telefone:
+          type: string
+          example: "(11) 99999-9999"
+        email:
+          type: string
+          example: "teste@aluno.ifsp.edu.br" 
+        periodo_de_referencia:
+          type: string
+          example: "8º Semestre" 
+      required:
+        - matricula
+        - nome
+        - email
+
+responses:
+  201:
+    description: "Aluno criado"
+    schema:
+      $ref: '#/definitions/Aluno'
+  400:
+    description: "Requisição inválida"

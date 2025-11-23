@@ -1,0 +1,21 @@
+tags:
+  - Docente
+summary: "Atualizar docente pela matricula"
+parameters:
+  - name: matricula
+    in: path
+    required: true
+    type: string
+    description: "Matricula do docente a ser atualizado"
+  - in: body
+    name: body
+    required: true
+    schema:
+      $ref: '#/definitions/Docente'
+responses:
+  200:
+    description: "Docente atualizado com sucesso"
+    schema:
+      $ref: '#/definitions/Docente'
+  404:
+    description: "Docente não encontrado"

@@ -54,7 +54,7 @@ def atualizar_horario(id: str):
 
 
 @horario_bp.delete("/<string:id>")
-@swag_from('docs/sala/sala_delete.yml')
+@swag_from('docs/horario/horario_delete.yml')
 def deletar_horario(id: str):
     horario_service.delete_horario(id)
     return jsonify({"detail": "Horário removido com sucesso"}), 200

@@ -1,15 +1,15 @@
 tags:
   - Horario
-summary: "Deletar um Horario"
+summary: "Deletar um Horário"
 parameters:
   - name: id
     in: path
     required: true
     type: integer
-    description: "ID do horario a deletar"
+    description: "ID do horário a deletar"
 responses:
   201:
-    description: "Horario deletado com sucesso"
+    description: "Horário deletado com sucesso"
     schema:
       $ref: '#/definitions/Horario'
   404:

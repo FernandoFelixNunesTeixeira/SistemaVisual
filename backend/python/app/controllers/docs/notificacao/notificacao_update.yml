@@ -1,0 +1,21 @@
+tags:
+  - Notificacao
+summary: "Atualizar notificação pelo id"
+parameters:
+  - name: id
+    in: path
+    required: true
+    type: integer
+    description: "id da notificação a ser atualizada"
+  - in: body
+    name: body
+    required: true
+    schema:
+      $ref: '#/definitions/Notificacao'
+responses:
+  200:
+    description: "Notificação atualizada com sucesso"
+    schema:
+      $ref: '#/definitions/Notificacao'
+  404:
+    description: "Notificação não encontrada"
