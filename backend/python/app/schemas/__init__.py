@@ -2,3 +2,4 @@ from .aluno_schema import CreateAlunoRequest, AlunoResponse
 from .sala_schema import CreateSalaRequest, SalaResponse
 from .docente_schema import CreateDocenteRequest, DocenteResponse
 from .horario_schema import CreateHorarioRequest, HorarioResponse
+from .notificacao_schema import CreateNotificacaoRequest, NotificacaoResponse
