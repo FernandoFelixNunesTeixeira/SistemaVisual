@@ -1,0 +1,34 @@
+tags:
+  - Horario
+summary: "Criar um Horario"
+consumes:
+  - application/json
+parameters:
+  - in: body
+    name: body
+    required: true
+    schema:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "Horario1"
+        hora_fim:
+          type: string
+          example: "Descrever"
+        hora_inicio:
+          type: string
+          example: "Descrever"
+        dia_semana:
+          type: string
+          example: "Segunda-feira" 
+      required:
+        - id
+
+responses:
+  201:
+    description: "Horário criado"
+    schema:
+      $ref: '#/definitions/Horario'
+  400:
+    description: "Requisição inválida"

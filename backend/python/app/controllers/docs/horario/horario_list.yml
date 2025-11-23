@@ -1,0 +1,11 @@
+tags:
+  - Horario
+summary: "Listar todos os horários"
+description: "Retorna a lista de horários cadastrados."
+responses:
+  200:
+    description: "Lista de horários retornada com sucesso"
+    schema:
+      type: array
+      items:
+        $ref: '#/definitions/Horario'

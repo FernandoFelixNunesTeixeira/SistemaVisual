@@ -1,6 +1,7 @@
 from ..interfaces.docente_service import IDocenteService
 from ..interfaces.docente_repository import IDocenteRepository
 from ..entities.docente import Docente
+from dataclasses import asdict
 
 class DocenteNotFoundError(Exception):
     pass
@@ -46,6 +47,9 @@ class DocenteService(IDocenteService):
         docente = self.repo.get_by_matricula(matricula)
         if not docente:
             raise DocenteNotFoundError(f"Docente com matrícula '{matricula}' não encontrado para atualização.")
+
+        if not isinstance(dados, dict):
+            dados = asdict(dados)
 
         for campo, valor in dados.items():
             if hasattr(docente, campo):

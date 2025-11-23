@@ -1,0 +1,21 @@
+tags:
+  - Horario
+summary: "Atualizar horário pelo ID"
+parameters:
+  - name: id
+    in: path
+    required: true
+    type: integer
+    description: "ID do horário a ser atualizado"
+  - in: body
+    name: body
+    required: true
+    schema:
+      $ref: '#/definitions/HorarioUpdate'
+responses:
+  200:
+    description: "horário atualizado com sucesso"
+    schema:
+      $ref: '#/definitions/Horario'
+  404:
+    description: "Horário não encontrado"

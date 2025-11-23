@@ -17,7 +17,7 @@ def criar_docente():
         email=schema.email,
         telefone=schema.telefone,
         matricula=schema.matricula,
-        foto=schema.foto,
+        foto="",
         coordenador=schema.coordenador,
     )
     docente = docente_service.create_docente(dto)
@@ -45,7 +45,7 @@ def atualizar_aluno(matricula: str):
         nome=schema.nome,
         email=schema.email,
         telefone=schema.telefone,
-        foto=schema.foto,
+        foto="",
         coordenador=schema.coordenador,
     )
     docente = docente_service.update_docente(matricula, dto)

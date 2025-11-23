@@ -10,7 +10,7 @@ class DocenteModel(db.Model):
     nome: Mapped[str] = mapped_column(String(50), nullable=False)
     telefone: Mapped[str] = mapped_column(String(50))
     email: Mapped[str] = mapped_column(String(50), nullable=False)
-    foto: Mapped[str] = mapped_column(String(45))
+    foto: Mapped[str] = mapped_column(String(45), nullable=False)
     coordenador: Mapped[int] = mapped_column(String(20), nullable=False)
 
     def to_entity(self) -> Docente:

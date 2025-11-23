@@ -11,3 +11,18 @@ definitions:
       nomeSala:
         type: string
         example: "Sala A"
+  Horario:
+    type: object
+    properties:
+      id:
+        type: integer
+        example: 1
+      hora_fim:
+        type: string
+        example: "Descrever"
+      hora_inicio:
+        type: string
+        example: "Descrever"
+      dia_semana:
+        type: string
+        example: "Segunda-feira"
