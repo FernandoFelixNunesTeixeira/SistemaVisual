@@ -1,0 +1,44 @@
+tags:
+  - Turma
+summary: "Criar uma Turma"
+consumes:
+  - application/json
+parameters:
+  - in: body
+    name: body
+    required: true
+    schema:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: "1"
+        codigoDisc:
+          type: string
+          example: "DWEC8"
+        nome:
+          type: string
+          example: "Desenvolvimento Web 2"
+        ano:
+          type: integer
+          example: "2025"
+        semestre:
+          type: integer
+          example: "2" 
+        horarios_id:
+          type: string
+          example: "Horario1" 
+
+      required:
+        - id
+        - codigoDisc
+        - ano
+        - horarios_id
+
+responses:
+  201:
+    description: "Turma criada"
+    schema:
+      $ref: '#/definitions/Turma'
+  400:
+    description: "Requisição inválida"

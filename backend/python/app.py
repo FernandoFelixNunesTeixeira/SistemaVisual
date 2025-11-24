@@ -8,6 +8,7 @@ from app.controllers.docente_controller import docente_bp
 from app.controllers.horario_controller import horario_bp
 from app.controllers.sala_controller import sala_bp
 from app.controllers.notificacao_controller import notificacao_bp
+from app.controllers.turma_controller import turma_bp
 from pydantic import ValidationError
 
 def create_app():
@@ -40,6 +41,7 @@ def create_app():
     app.register_blueprint(sala_bp, url_prefix="/api/salas")
     app.register_blueprint(horario_bp, url_prefix="/api/horarios")
     app.register_blueprint(notificacao_bp, url_prefix="/api/notificacoes")
+    app.register_blueprint(turma_bp, url_prefix="/api/turmas")
 
     @app.route("/")
     def root():

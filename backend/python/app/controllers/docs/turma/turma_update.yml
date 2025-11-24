@@ -1,0 +1,21 @@
+tags:
+  - Turma
+summary: "Atualizar turma pelo ID"
+parameters:
+  - name: id
+    in: path
+    required: true
+    type: integer
+    description: "ID da turma a ser atualizada"
+  - in: body
+    name: body
+    required: true
+    schema:
+      $ref: '#/definitions/Turma'
+responses:
+  200:
+    description: "Turma atualizada com sucesso"
+    schema:
+      $ref: '#/definitions/Turma'
+  404:
+    description: "Turma não encontrada"

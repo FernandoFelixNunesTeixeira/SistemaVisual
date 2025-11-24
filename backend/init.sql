@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS horarios (
 CREATE TABLE IF NOT EXISTS turmas (
   id INT NOT NULL,
   codigoDisc VARCHAR(6) NOT NULL,
-  Nome VARCHAR(50) NULL,
+  nome VARCHAR(50) NULL,
   ano INT NOT NULL,
   semestre INT NULL,
   horarios_id VARCHAR(9) NOT NULL,
