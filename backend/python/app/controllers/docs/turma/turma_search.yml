@@ -1,0 +1,17 @@
+tags:
+  - Turma
+summary: "Buscar turma pelo ID"
+description: "Retorna uma turma específicada pelo seu ID."
+parameters:
+  - name: id
+    in: path
+    required: true
+    type: integer
+    description: "ID da turma a ser recuperada"
+responses:
+  200:
+    description: "Turma encontrada"
+    schema:
+      $ref: '#/definitions/Turma'
+  404:
+    description: "Turma não encontrada"

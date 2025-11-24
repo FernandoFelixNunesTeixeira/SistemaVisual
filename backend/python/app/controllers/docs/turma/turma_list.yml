@@ -1,0 +1,11 @@
+tags:
+  - Turma
+summary: "Listar todas as turmas"
+description: "Retorna a lista de turmas cadastradas."
+responses:
+  200:
+    description: "Lista de turmas retornada com sucesso"
+    schema:
+      type: array
+      items:
+        $ref: '#/definitions/Turma'

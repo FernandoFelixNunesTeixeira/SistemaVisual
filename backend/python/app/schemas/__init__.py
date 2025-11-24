@@ -3,3 +3,4 @@ from .sala_schema import CreateSalaRequest, SalaResponse
 from .docente_schema import CreateDocenteRequest, DocenteResponse
 from .horario_schema import CreateHorarioRequest, HorarioResponse
 from .notificacao_schema import CreateNotificacaoRequest, NotificacaoResponse
+from .turma_schema import CreateTurmaRequest, TurmaResponse

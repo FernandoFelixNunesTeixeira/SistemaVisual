@@ -1,0 +1,16 @@
+tags:
+  - Turma
+summary: "Deletar uma Turma"
+parameters:
+  - name: id
+    in: path
+    required: true
+    type: integer
+    description: "ID da turma a deletar"
+responses:
+  201:
+    description: "Turma deletada com sucesso"
+    schema:
+      $ref: '#/definitions/Turma'
+  404:
+    description: "Turma não encontrada"
