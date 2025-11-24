@@ -8,8 +8,8 @@ class HorarioModel(db.Model):
     __tablename__ = "horarios"
 
     id: Mapped[str] = mapped_column(String(9), primary_key=True)
-    hora_fim: Mapped[time] = mapped_column(String(50), nullable=False)
-    hora_inicio: Mapped[time] = mapped_column(String(50), nullable=False)
+    hora_fim: Mapped[str] = mapped_column(String(50), nullable=False)
+    hora_inicio: Mapped[str] = mapped_column(String(50), nullable=False)
     dia_semana: Mapped[str] = mapped_column(String(20), nullable=False)
     
 

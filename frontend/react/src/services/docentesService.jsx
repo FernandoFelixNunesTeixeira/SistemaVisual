@@ -6,24 +6,22 @@ export const getDocentes = async () => {
   return axios.get(API_URL);
 };
 
-// 🔹 Retorna sala por ID
+// Retorna docente por ID
 export const getDocentesById = async (matricula) => {
   return axios.get(`${API_URL}/${matricula}`);
 };
 
-// 🔹 Cadastra uma nova sala
-// (seu endpoint é /api/sala/cadastro)
+// Cadastra um novo docente
 export const createDocente = async (docente) => {
   return axios.post(`${API_URL}/`, docente);
 };
 
-// 🔹 Atualiza uma sala existente
-// (seu endpoint é /api/sala/Atualizar/{id})
+// Atualiza um docente existente
 export const updateDocente = async (matricula, docente) => {
   return axios.put(`${API_URL}/${matricula}`, docente);
 };
 
-// 🔹 Deleta uma sala
+// Deleta um docente
 export const deleteDocente = async (matricula) => {
   return axios.delete(`${API_URL}/${matricula}`);
 };

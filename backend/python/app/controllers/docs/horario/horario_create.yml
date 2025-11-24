@@ -12,13 +12,13 @@ parameters:
       properties:
         id:
           type: string
-          example: "Horario1"
+          example: "DWEC8"
         hora_fim:
           type: string
-          example: "Descrever"
+          example: "08:00:00"
         hora_inicio:
           type: string
-          example: "Descrever"
+          example: "07:00:00"
         dia_semana:
           type: string
           example: "Segunda-feira" 

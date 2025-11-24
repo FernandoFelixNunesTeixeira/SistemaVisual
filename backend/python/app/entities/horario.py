@@ -4,8 +4,8 @@ class Horario:
     def __init__(
             self, 
             id: str,
-            hora_inicio: time, 
-            hora_fim: time,
+            hora_inicio: str, 
+            hora_fim: str,
             dia_semana: str,
         ):
 

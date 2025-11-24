@@ -4,6 +4,6 @@ import time
 @dataclass
 class HorarioDTO:
     id: str
-    hora_fim: time
-    hora_inicio: time
+    hora_fim: str
+    hora_inicio: str
     dia_semana: str

@@ -6,7 +6,7 @@ parameters:
   - name: id
     in: path
     required: true
-    type: integer
+    type: string
     description: "ID do horário a ser recuperado"
 responses:
   200:

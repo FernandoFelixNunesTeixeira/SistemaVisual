@@ -2,6 +2,8 @@ from ..interfaces.horario_service import IHorarioService
 from ..interfaces.horario_repository import IHorarioRepository
 from ..entities.horario import Horario
 from dataclasses import asdict
+from datetime import datetime
+
 
 class HorarioNotFoundError(Exception):
     pass
@@ -19,6 +21,7 @@ class HorarioService(IHorarioService):
         self.repo = repo
 
     def create_horario(self, horario: Horario) -> Horario:
+        date_format = "%H:%M:%S"
         if not horario.id or horario.id.strip() == "":
             raise InvalidHorarioDataError("id é obrigatório.")
 
@@ -31,17 +34,17 @@ class HorarioService(IHorarioService):
         if not horario.dia_semana or horario.dia_semana.strip() == "":
             raise InvalidHorarioDataError("dia da semana é obrigatório")
         
-        if horario.hora_inicio > horario.hora_fim:
+        if datetime.strptime(horario.hora_inicio, date_format) > datetime.strptime(horario.hora_fim, date_format):
             raise InvalidHorarioDataError("hora de início tem que ser menor que hora de fim")
 
-        existente = self.repo.get_by_matricula(horario.matricula)
+        existente = self.repo.get_by_id(horario.id)
         if existente:
-            raise HorarioAlreadyExistsError(f"Já existe um horário com a matrícula '{horario.matricula}'.")
+            raise HorarioAlreadyExistsError(f"Já existe um horário com o id'{horario.id}'.")
 
         return self.repo.create(horario)
 
     def get_horario(self, id: str) -> Horario:
-        horario = self.repo.get_by_matricula(id)
+        horario = self.repo.get_by_id(id)
         if not horario:
             raise HorarioNotFoundError(f"Horario com id '{id}' não encontrado.")
         return horario
@@ -71,7 +74,7 @@ class HorarioService(IHorarioService):
         return atualizado
 
     def delete_horario(self, id: str) -> bool:
-        horario = self.repo.get_by_matricula(id)
+        horario = self.repo.get_by_id(id)
         if not horario:
             raise HorarioNotFoundError(f"Horario com id '{id}' não encontrado para exclusão.")
 

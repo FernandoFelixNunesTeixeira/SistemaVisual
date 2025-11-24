@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  title: API Salas, Horários, notificações, docentes e alunos 
+  title: API Salas, Horários, Notificações, Docentes e Alunos 
 definitions:
   Sala:
     type: object
@@ -15,14 +15,14 @@ definitions:
     type: object
     properties:
       id:
-        type: integer
-        example: 1
+        type: string
+        example: "DWEC8"
       hora_fim:
         type: string
-        example: "Descrever"
+        example: "08:00:00"
       hora_inicio:
         type: string
-        example: "Descrever"
+        example: "07:00:00"
       dia_semana:
         type: string
         example: "Segunda-feira"

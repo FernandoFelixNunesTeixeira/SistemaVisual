@@ -80,7 +80,7 @@ function GerenciamentoDocentes() {
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
                 onSave={handleSaveForm}
-                alunoParaAtualizar={updatingTeacher}
+                docenteParaAtualizar={updatingTeacher}
             />
 
             <div className="table-controls">

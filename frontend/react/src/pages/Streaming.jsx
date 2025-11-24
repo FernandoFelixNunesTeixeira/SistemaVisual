@@ -24,7 +24,7 @@ const VideoStream = () => {
     await pc.setLocalDescription(offer);
 
     try {
-        const response = await fetch('http://192.168.15.29:8000/offer', {
+        const response = await fetch('http://127.0.0.1:8000/offer', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
