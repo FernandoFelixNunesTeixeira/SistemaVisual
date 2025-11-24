@@ -7,7 +7,7 @@ function TermOfUse() {
             <h3 className="text-center mb-3"><span>Política de Privacidade</span></h3>
 
             <div className="p-5">
-                <p><span>A sua privacidade é importante para nós. É política do Studant CellVision respeitar a sua privacidade em relação a qualquer informação sua que possamos coletar no site <a href="studant-cellvision.com.br">Studant CellVision</a>, e outros sites que possuímos e operamos.</span></p>
+                <p><span>A sua privacidade é importante para nós. É política do Studant CellVision respeitar a sua privacidade em relação a qualquer informação sua que possamos coletar no site <a href="./">Studant CellVision</a>, e outros sites que possuímos e operamos.</span></p>
                 <p><span>Solicitamos informações pessoais apenas quando realmente precisamos delas para lhe fornecer um serviço. Fazemo-lo por meios justos e legais, com o seu conhecimento e consentimento. Também informamos por que estamos coletando e como será usado.</span></p>
                 <p><span>Apenas retemos as informações coletadas pelo tempo necessário para fornecer o serviço solicitado. Quando armazenamos dados, protegemos dentro de meios comercialmente aceitáveis ​​para evitar perdas e roubos, bem como acesso, divulgação, cópia, uso ou modificação não autorizados.</span></p>
                 <p><span>Não compartilhamos informações de identificação pessoal publicamente ou com terceiros, exceto quando exigido por lei.</span></p>

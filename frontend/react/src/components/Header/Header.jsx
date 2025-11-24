@@ -17,7 +17,7 @@ const Header = () => {
       <div className="header-right d-flex flex-row align-items-center mx-3 gap-5">
         <div className="d-flex flex-row gap-5">
           <h5><a href="./">Home</a></h5>
-          <h5><a href="#">Screen2</a></h5>
+          {/* <h5><a href="#">Screen2</a></h5> */} 
           <h5><a href="./monitoring">Painel</a></h5>
         </div>
         
