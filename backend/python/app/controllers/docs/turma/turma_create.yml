@@ -10,9 +10,6 @@ parameters:
     schema:
       type: object
       properties:
-        id:
-          type: integer
-          example: "1"
         codigoDisc:
           type: string
           example: "DWEC8"
@@ -21,16 +18,15 @@ parameters:
           example: "Desenvolvimento Web 2"
         ano:
           type: integer
-          example: "2025"
+          example: 2025
         semestre:
           type: integer
-          example: "2" 
+          example: 2 
         horarios_id:
           type: string
           example: "Horario1" 
 
       required:
-        - id
         - codigoDisc
         - ano
         - horarios_id
@@ -42,3 +38,5 @@ responses:
       $ref: '#/definitions/Turma'
   400:
     description: "Requisição inválida"
+  500:
+    description: "Erro interno do servidor"

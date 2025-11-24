@@ -6,14 +6,12 @@ from ..entities.turma import Turma
 class TurmaModel(db.Model):
     __tablename__ = "turmas"
 
-    id: Mapped[int] = mapped_column(String(50), primary_key=True)
+    id: Mapped[int] = mapped_column(db.BigInteger, primary_key=True, autoincrement=True)
     codigoDisc: Mapped[str] = mapped_column(String(6), nullable=False)
     nome: Mapped[str] = mapped_column(String(50))
     ano: Mapped[int] = mapped_column(String(4), nullable=False)
     semestre: Mapped[int] = mapped_column(String(2))
     horarios_id: Mapped[str] = mapped_column(String(50), nullable=False)
-
-    
 
     def to_entity(self) -> Turma:
         return Turma(

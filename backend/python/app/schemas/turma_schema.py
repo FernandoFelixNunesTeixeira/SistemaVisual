@@ -4,7 +4,6 @@ import time
 
 
 class CreateTurmaRequest(BaseModel):
-    id: int
     codigoDisc: str = Field(..., min_length=2, max_length=9)
     nome: str = Field(..., min_length=2, max_length=50)
     ano: int

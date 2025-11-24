@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify
 from ..services.turma_service import TurmaService
 from ..repositories.turma_repository import TurmaRepository
 from ..schemas.turma_schema import CreateTurmaRequest, TurmaResponse
-from ..DTOs.turma_dto import TurmaDTO
+from ..DTOs.turma_dto import CreateTurmaDTO, TurmaDTO
 from flasgger import swag_from
 
 turma_bp = Blueprint("turmas", __name__)
@@ -14,8 +14,7 @@ def criar_turma():
     data = request.get_json()
     schema = CreateTurmaRequest(**data)
 
-    dto = TurmaDTO(
-        id=schema.id,
+    dto = CreateTurmaDTO(
         codigoDisc = schema.codigoDisc,
         nome= schema.nome,
         ano= schema.ano,
@@ -45,8 +44,7 @@ def atualizar_turma(id: int):
     data = request.get_json()
     schema = CreateTurmaRequest(**data)
 
-    dto = TurmaDTO(
-        id=schema.id,
+    dto = CreateTurmaDTO(
         codigoDisc = schema.codigoDisc,
         nome= schema.nome,
         ano= schema.ano,
@@ -61,4 +59,4 @@ def atualizar_turma(id: int):
 @swag_from('docs/turma/turma_delete.yml')
 def deletar_turma(id: int):
     turma_service.delete_turma(id)
-    return jsonify({"detail": "Horário removido com sucesso"}), 200
+    return jsonify({"detail": "Turma removida com sucesso"}), 200

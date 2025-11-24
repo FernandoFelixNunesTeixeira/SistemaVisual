@@ -14,7 +14,6 @@ class TurmaRepository(ITurmaRepository):
 
     def create(self, turma: Turma) -> Turma:
         model = TurmaModel(
-            id=turma.id,
             codigoDisc=turma.codigoDisc,
             nome=turma.nome,
             ano=turma.ano,

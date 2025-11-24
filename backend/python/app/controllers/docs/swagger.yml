@@ -29,9 +29,6 @@ definitions:
   Turma:
     type: object
     properties:
-      id:
-        type: integer
-        example: "1"
       codigoDisc:
         type: string
         example: "DWEC8"

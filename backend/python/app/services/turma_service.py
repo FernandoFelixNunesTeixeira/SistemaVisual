@@ -20,10 +20,6 @@ class TurmaService(ITurmaService):
         self.repo = repo
 
     def create_turma(self, turma: Turma) -> Turma:
-        date_format = "%H:%M:%S"
-        if not turma.id:
-            raise InvalidTurmaDataError("id é obrigatório.")
-        
         if not turma.codigoDisc or turma.codigoDisc.strip() == "":
             raise InvalidTurmaDataError("Código da disciplina é obrigatório.")
         
@@ -32,11 +28,6 @@ class TurmaService(ITurmaService):
         
         if not turma.horarios_id or turma.horarios_id.strip() == "":
             raise InvalidTurmaDataError("id do horário associado a disciplina é obrigatório.")
-
-    
-        existente = self.repo.get_by_id(turma.id)
-        if existente:
-            raise TurmaAlreadyExistsError(f"Já existe uma turma com o id'{turma.id}'.")
 
         return self.repo.create(turma)
 
