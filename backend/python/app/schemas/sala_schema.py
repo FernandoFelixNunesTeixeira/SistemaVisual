@@ -5,3 +5,4 @@ class CreateSalaRequest(BaseModel):
 
 class SalaResponse(BaseModel):
     nomeSala: str
+    id: int

@@ -5,7 +5,7 @@ from ..entities import Sala
 
 class SalaRepository(ISalaRepository):
 
-    def get_by_numero(self, id: str) -> Sala | None:
+    def get_by_numero(self, id: int) -> Sala | None:
         model = SalaModel.query.get(id)
         if model:
             return model.to_entity() 
@@ -34,7 +34,7 @@ class SalaRepository(ISalaRepository):
         db.session.commit()
         return model.to_entity()
 
-    def delete(self, id: str) -> None:
+    def delete(self, id: int) -> None:
         model = SalaModel.query.get(id)
         if model:
             db.session.delete(model)

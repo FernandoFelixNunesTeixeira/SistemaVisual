@@ -14,13 +14,13 @@ export const getSalaById = async (id) => {
 // 🔹 Cadastra uma nova sala
 // (seu endpoint é /api/sala/cadastro)
 export const createSala = async (user) => {
-  return axios.post(`${API_URL}/Cadastro`, user);
+  return axios.post(`${API_URL}/`, user);
 };
 
 // 🔹 Atualiza uma sala existente
 // (seu endpoint é /api/sala/Atualizar/{id})
 export const updateSala = async (id, user) => {
-  return axios.put(`${API_URL}/Atualizar/${id}`, user);
+  return axios.put(`${API_URL}/${id}`, user);
 };
 
 // 🔹 Deleta uma sala

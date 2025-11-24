@@ -1,196 +1,171 @@
-import './GerenciamentoSalas.css';
+import '../Gerenciamento.css';
+import { usePagination } from '../../../hooks/usePagination';
+import { createSala, deleteSala, getSalas, updateSala } from '../../../services/salasService';
 import { useState, useEffect } from 'react';
-import { getSalas, deleteSala } from '../../../services/salasService';
-import usePaginationAndFilter from '../../../hooks/usePaginationAndFilter';
+import ModalNovaSala from './ModalNovaSala';
 
-// Ícones
-const iconNovo = `https://api.iconify.design/feather/plus-circle.svg?color=%23FFFFFF&width=18&height=18`;
-const iconEditar = `https://api.iconify.design/feather/edit.svg?color=%2338B6FF&width=18&height=18`;
-const iconExcluir = `https://api.iconify.design/feather/trash-2.svg?color=%23FF0000&width=18&height=18`;
+// TO-DO: Adicionar periodo_de_referencia e filtro por ano e bimestre
+// Barra de Pesquisa tambem seria bom
 
-export default function GerenciamentoSalas() {
-  const [salas, setSalas] = useState([]);
+function GerenciamentoSalas() {
+    const [apiData, setApiData] = useState([]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [updatingStudent, setUpdatingStudent] = useState(null);
 
-  useEffect(() => {
-    async function carregar() {
-      try {
-        const res = await getSalas();
-        const payload = res?.data ?? res;
-        const list = Array.isArray(payload)
-          ? payload
-          : payload?.items ?? payload?.results ?? [];
-        setSalas(list);
-      } catch (err) {
-        console.error('Erro ao buscar salas:', err);
-      }
-    }
-    carregar();
-  }, []);
+    useEffect(() => {
+        getSalas().then(res => setApiData(res.data));
+    }, []);
 
-  const handleDelete = async (id) => {
-    if (window.confirm('Tem certeza que deseja excluir a sala?')) {
-      try {
-        await deleteSala(id);
-        setSalas(salas.filter(s => s.id !== id));
-      } catch (err) {
-        console.error('Erro ao excluir sala:', err);
-      }
-    }
-  };
+    const handleSaveForm = async (formData) => {
+        try {
+            if (updatingStudent) {
+                await updateSala(updatingStudent.id, formData);
+            } else {
+                await createSala(formData);
+            }
 
-  const {
-    paginatedList,
-    currentPage,
-    totalPages,
-    filter,
-    handleFilterChange,
-    handlePageChange,
-    hangleItemsPerPageChange,
-    itemsPerPage: itemsPerPageState,
-    totalItems,
-  } = usePaginationAndFilter(salas, 10);
+            const res = await getSalas();
+            setApiData(res.data);
 
-  return (
-    <div className="student-management-container">
+            setIsModalOpen(false);
+            setUpdatingStudent(null); 
+        } catch (error) {
+            console.error("Erro ao salvar sala", error);
+            alert("Erro ao salvar sala.");
+        }
+    };
 
-      <div className="student-header">
-        <h1>Gerenciamento de Salas</h1>
-        <button className="btn-novo-aluno">
-          <img src={iconNovo} alt="Nova Sala" />
-          NOVA SALA
-        </button>
-      </div>
+    const handleOpenNew = () => {
+        setUpdatingStudent(null);
+        setIsModalOpen(true);
+    };
 
-      <div className="table-controls d-flex justify-content-between mb-3">
-        <div className="input-group w-25">
-          <span className="input-group-text">Filtro</span>
-          <select
-            className="form-select"
-            value={filter}
-            onChange={(e) => handleFilterChange(e.target.value)}
-          >
-            <option value="">Todas</option>
-            <option value="ativo">Ativas</option>
-            <option value="inativo">Inativas</option>
-          </select>
+    const handleOpenUpdate = (classroom) => {
+        setUpdatingStudent(classroom);
+        setIsModalOpen(true);
+    };
+
+    const handleDelete = async (id) => {
+        if (window.confirm("Tem certeza que deseja excluir?")) {
+            await deleteSala(id);
+            setApiData(apiData.filter(u => u.id !== id));
+        }
+    };
+
+    // Pagination
+    const {
+        paginatedList,
+        currentPage,
+        totalPages,
+        totalItems,
+        itemsPerPage,
+        handlePageChange,
+        handleItemsPerPageChange
+    } = usePagination(apiData, 10);
+
+    const totalRegistros = apiData.length;
+
+    return (
+        <div className="gerenciamento-management-container">
+
+            <div className="gerenciamento-header">
+                <h1>Gerenciamento de Salas</h1>
+                <button onClick={handleOpenNew} className="btn-novo">
+                    <i className="bi bi-plus-circle" style={{ marginRight: '8px' }}></i>
+                    NOVA SALA
+                </button>
+            </div>
+
+            <ModalNovaSala
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                onSave={handleSaveForm}
+                salaParaAtualizar={updatingStudent}
+            />
+
+            <div className="table-controls">
+                <div className="show-entries">
+                    <label htmlFor="show-entries-select">Exibir</label>
+                    <select id="show-entries-select" value={itemsPerPage} onChange={(e) => handleItemsPerPageChange(e.target.value)}>
+                        <option value="10" defaultValue>10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                    </select>
+                    <span>resultados por página</span>
+                </div>
+            </div>
+
+            <div className="table-card">
+                <table className="gerenciamento-table">
+                    <thead>
+                        <tr>
+                            <th>Nome da Sala</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {paginatedList.map((classroom, index) => (
+                            <tr key={index}>
+                                <td>{classroom.nomeSala}</td>
+                                <td>
+                                    <div className="action-buttons">
+                                        <button onClick={() => handleOpenUpdate(classroom)} className="action-btn edit" title="Editar">
+                                            <i className="bi bi-pencil-square" style={{ color: '#38B6FF', fontSize: '1.2rem' }}></i>
+                                        </button>
+                                        <button onClick={() => handleDelete(classroom.id)} className="action-btn delete" title="Excluir">
+                                            <i className="bi bi-trash" style={{ color: '#FF0000', fontSize: '1.2rem' }}></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        ))}
+
+                        {/* Linhas de placeholder */}
+                        {Array.from({
+                            length: Math.max(0, itemsPerPage - paginatedList.length)
+                        }).map((_, index) => (
+                            <tr key={`placeholder-${index}`} style={{ height: '62px' }}>
+                                <td></td><td></td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+
+            <div className="table-footer">
+                <div className="footer-info">
+                    Mostrando de {(currentPage - 1) * itemsPerPage + 1}
+                    {" "}
+                    até {Math.min(currentPage * itemsPerPage, totalItems)}
+                    {" "}
+                    de {totalItems} registros
+                </div>
+
+                <nav aria-label="Page navigation">
+                    <ul className="pagination">
+                        {/* Botão anterior */}
+                        <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
+                            <button className="page-link" onClick={() => handlePageChange(currentPage - 1)}>
+                                Anterior
+                            </button>
+                        </li>
+
+                        {/* Páginaatual */}
+                        <li className="page-item active">
+                            <span className="page-link">{currentPage}</span>
+                        </li>
+
+                        {/* Botão próximo */}
+                        <li className={`page-item ${currentPage === totalPages ? "disabled" : ""}`}>
+                            <button className="page-link" onClick={() => handlePageChange(currentPage + 1)}>
+                                Próximo
+                            </button>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </div>
-
-        <div className="input-group w-25">
-          <span className="input-group-text">Itens/Página</span>
-          <select
-            className="form-select"
-            value={itemsPerPageState}
-            onChange={(e) => hangleItemsPerPageChange(Number(e.target.value))}
-          >
-            <option value={5}>5</option>
-            <option value={10}>10</option>
-            <option value={20}>20</option>
-            <option value={50}>50</option>
-          </select>
-        </div>
-      </div>
-
-      <div className="table-card">
-        <table className="student-table">
-          <thead>
-            <tr>
-              <th>Nome da Sala</th>
-              <th>Ação</th>
-            </tr>
-          </thead>
-          <tbody>
-            {paginatedList.length === 0 ? (
-              <tr>
-                <td colSpan={2} className="text-center py-4">
-                  Nenhuma sala encontrada.
-                </td>
-              </tr>
-            ) : (
-              paginatedList.map((sala, idx) => (
-                <tr key={idx}>
-                  <td>{sala.nomeSala}</td>
-                  <td>
-                    <div className="action-buttons">
-                      <button className="action-btn edit" title="Editar">
-                        <img src={iconEditar} alt="Editar" />
-                      </button>
-                      <button
-                        className="action-btn delete"
-                        title="Excluir"
-                        onClick={() => handleDelete(sala.id)}
-                      >
-                        <img src={iconExcluir} alt="Excluir" />
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))
-            )}
-          </tbody>
-        </table>
-      </div>
-
-      <div className="table-footer d-flex justify-content-between align-items-center mt-3">
-        <div className="footer-info">
-          Mostrando de {(currentPage - 1) * itemsPerPageState + 1} até{' '}
-          {Math.min(currentPage * itemsPerPageState, totalItems)} de {totalItems}{' '}
-          registros
-        </div>
-
-        <nav>
-          <ul className="pagination mb-0">
-            <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
-              <button className="page-link" onClick={() => handlePageChange(1)}>
-                Primeira
-              </button>
-            </li>
-            <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
-              <button
-                className="page-link"
-                onClick={() => handlePageChange(currentPage - 1)}
-              >
-                «
-              </button>
-            </li>
-            {Array.from({ length: totalPages }).map((_, i) => {
-              const pageNum = i + 1;
-              return (
-                <li
-                  key={pageNum}
-                  className={`page-item ${pageNum === currentPage ? 'active' : ''}`}
-                >
-                  <button
-                    className="page-link"
-                    onClick={() => handlePageChange(pageNum)}
-                  >
-                    {pageNum}
-                  </button>
-                </li>
-              );
-            })}
-            <li
-              className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}
-            >
-              <button
-                className="page-link"
-                onClick={() => handlePageChange(currentPage + 1)}
-              >
-                »
-              </button>
-            </li>
-            <li
-              className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}
-            >
-              <button
-                className="page-link"
-                onClick={() => handlePageChange(totalPages)}
-              >
-                Última
-              </button>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </div>
-  );
+    );
 }
+
+export default GerenciamentoSalas;
