@@ -1,0 +1,17 @@
+tags:
+  - Docente
+summary: "Buscar docente pela matricula"
+description: "Retorna um docente específicado pela sua matricula."
+parameters:
+  - name: matricula
+    in: path
+    required: true
+    type: string
+    description: "Matricula do docente a ser recuperado"
+responses:
+  200:
+    description: "Docente encontrado"
+    schema:
+      $ref: '#/definitions/Docente'
+  404:
+    description: "Docente não encontrado"

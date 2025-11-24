@@ -1,0 +1,34 @@
+tags:
+  - Notificacao
+summary: "Criar uma Notificação"
+consumes:
+  - application/json
+parameters:
+  - in: body
+    name: body
+    required: true
+    schema:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: "1"
+        occurred_at:
+          type: time
+          example: NULL
+        porcentagem:
+          type: float
+          example: "0.95"
+        turmas_id:
+          type: int
+          example: "1" 
+      required:
+        - turmas_id
+
+responses:
+  201:
+    description: "Notificação criada"
+    schema:
+      $ref: '#/definitions/Notificacao'
+  400:
+    description: "Requisição inválida"

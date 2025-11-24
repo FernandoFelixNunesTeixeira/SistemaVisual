@@ -1,0 +1,16 @@
+tags:
+  - Aluno
+summary: "Deletar um Aluno"
+parameters:
+  - name: matricula
+    in: path
+    required: true
+    type: string
+    description: "Matricula do aluno a deletar"
+responses:
+  201:
+    description: "Aluno deletado com sucesso"
+    schema:
+      $ref: '#/definitions/Aluno'
+  404:
+    description: "Aluno não encontrado"

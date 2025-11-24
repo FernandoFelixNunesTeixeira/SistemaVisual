@@ -1,0 +1,17 @@
+tags:
+  - Horario
+summary: "Buscar horário pelo ID"
+description: "Retorna um  horário específicado pelo seu ID."
+parameters:
+  - name: id
+    in: path
+    required: true
+    type: string
+    description: "ID do horário a ser recuperado"
+responses:
+  200:
+    description: "Horário encontrado"
+    schema:
+      $ref: '#/definitions/Horario'
+  404:
+    description: "Horário não encontrado"

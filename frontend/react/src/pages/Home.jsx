@@ -11,7 +11,7 @@ function Home() {
                 <div className="row g-4">
 
                     <div className="col-md-4">
-                        <Link to="" className="card dashboard-card shadow-sm border-0 rounded-4">
+                        <Link to="/teachers" className="card dashboard-card shadow-sm border-0 rounded-4">
                             <div className="card-body p-4 d-flex align-items-center">
                                 <img src="https://api.iconify.design/ph/user-list-bold.svg?color=%230dcaf0&width=56&height=56" alt="Home Icons"/>
                                 <span className="ms-4 dashboard-text">GERENCIAR FISCAIS</span>
@@ -20,7 +20,7 @@ function Home() {
                     </div>
 
                     <div className="col-md-4">
-                        <Link to="" className="card dashboard-card shadow-sm border-0 rounded-4">
+                        <Link to="/students" className="card dashboard-card shadow-sm border-0 rounded-4">
                             <div className="card-body p-4 d-flex align-items-center">
                                 <img src="https://api.iconify.design/ph/student-bold.svg?color=%230dcaf0&width=56&height=56" alt="Home Icons"/>
                                 <span className="ms-4 dashboard-text">GERENCIAR ALUNOS</span>

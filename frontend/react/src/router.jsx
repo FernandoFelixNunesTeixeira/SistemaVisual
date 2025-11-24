@@ -8,9 +8,11 @@ import Contact from "./pages/Contact.jsx";
 import About from "./pages/About.jsx";
 import User from "./pages/User.jsx";
 import AlertDashboard from "./pages/Alerts/AlertDashboard.jsx";
-import ListAlunos from "./pages/Gerenciamento/Alunos/ListAlunos.jsx";
+import GerenciamentoAlunos from "./pages/Gerenciamento/Alunos/GerenciamentoAlunos.jsx";
 import './main.css';
 import GerenciamentoSalas from "./pages/Gerenciamento/Salas/GerenciamentoSalas.jsx";
+import Streaming from "./pages/Streaming.jsx";
+import GerenciamentoDocentes from "./pages/Gerenciamento/Docentes/GerenciamentoDocentes.jsx";
 
 const isAuthenticated = () => {
     return true; // TO-DO: GETS AUTHENTICAITON TOKEN FROM API OR LOCALSTORAGE
@@ -64,11 +66,19 @@ const router = createBrowserRouter([
             },
             {
                 path: "/students",
-                element: <ListAlunos />,
+                element: <GerenciamentoAlunos />,
+            },
+            {
+                path: "/teachers",
+                element: <GerenciamentoDocentes />,
             },
             {
                 path: "/classrooms",
                 element: <GerenciamentoSalas />,
+            },
+            {
+                path: "/video",
+                element: <Streaming />
             }
         ],
     },

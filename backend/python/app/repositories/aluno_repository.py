@@ -36,7 +36,7 @@ class AlunoRepository(IAlunoRepository):
         model.nome = aluno.nome
         model.telefone = aluno.telefone
         model.email = aluno.email
-        model.periodoDeReferencia = aluno.periodoDeReferencia
+        model.periodo_de_referencia = aluno.periodo_de_referencia
         model.foto = aluno.foto
 
         db.session.commit()

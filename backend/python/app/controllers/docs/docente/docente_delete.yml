@@ -1,0 +1,16 @@
+tags:
+  - Docente
+summary: "Deletar um Docente"
+parameters:
+  - name: matricula
+    in: path
+    required: true
+    type: string
+    description: "Matricula do docente a deletar"
+responses:
+  201:
+    description: "Docente deletado com sucesso"
+    schema:
+      $ref: '#/definitions/Docente'
+  404:
+    description: "Docente não encontrado"

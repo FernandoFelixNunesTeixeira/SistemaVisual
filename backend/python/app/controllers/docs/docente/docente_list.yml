@@ -1,0 +1,11 @@
+tags:
+  - Docente
+summary: "Listar todos os docentes"
+description: "Retorna a lista de docentes cadastrados."
+responses:
+  200:
+    description: "Lista de docentes retornada com sucesso"
+    schema:
+      type: array
+      items:
+        $ref: '#/definitions/Docente'

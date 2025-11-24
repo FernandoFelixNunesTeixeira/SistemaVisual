@@ -1,0 +1,17 @@
+tags:
+  - Aluno
+summary: "Buscar aluno pela matricula"
+description: "Retorna um  aluno específicado pela sua matricula."
+parameters:
+  - name: matricula
+    in: path
+    required: true
+    type: string
+    description: "Matricula do aluno a ser recuperado"
+responses:
+  200:
+    description: "Aluno encontrado"
+    schema:
+      $ref: '#/definitions/Aluno'
+  404:
+    description: "Aluno não encontrado"

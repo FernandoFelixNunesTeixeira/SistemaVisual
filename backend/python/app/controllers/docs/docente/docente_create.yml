@@ -1,0 +1,40 @@
+tags:
+  - Docente
+summary: "Criar um Docente"
+consumes:
+  - application/json
+parameters:
+  - in: body
+    name: body
+    required: true
+    schema:
+      type: object
+      properties:
+        matricula:
+          type: string
+          example: "PC7856897"
+        nome:
+          type: string
+          example: "Juliano"
+        telefone:
+          type: string
+          example: "(11) 99999-9999"
+        email:
+          type: string
+          example: "teste@aluno.ifsp.edu.br" 
+        coordenador:
+          type: integer
+          example: "0" 
+      required:
+        - matricula
+        - nome
+        - email
+        - coordenador
+
+responses:
+  201:
+    description: "Docente criado"
+    schema:
+      $ref: '#/definitions/Docente'
+  400:
+    description: "Requisição inválida"

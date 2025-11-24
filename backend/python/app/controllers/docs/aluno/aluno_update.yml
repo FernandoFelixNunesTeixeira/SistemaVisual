@@ -1,0 +1,21 @@
+tags:
+  - Aluno
+summary: "Atualizar aluno pela matricula"
+parameters:
+  - name: matricula
+    in: path
+    required: true
+    type: string
+    description: "Matricula do aluno a ser atualizado"
+  - in: body
+    name: body
+    required: true
+    schema:
+      $ref: '#/definitions/Aluno'
+responses:
+  200:
+    description: "Aluno atualizado com sucesso"
+    schema:
+      $ref: '#/definitions/Aluno'
+  404:
+    description: "Aluno não encontrado"

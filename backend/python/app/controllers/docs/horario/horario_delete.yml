@@ -1,0 +1,16 @@
+tags:
+  - Horario
+summary: "Deletar um Horário"
+parameters:
+  - name: id
+    in: path
+    required: true
+    type: string
+    description: "ID do horário a deletar"
+responses:
+  201:
+    description: "Horário deletado com sucesso"
+    schema:
+      $ref: '#/definitions/Horario'
+  404:
+    description: "Horário não encontrado"
