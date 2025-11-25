@@ -15,7 +15,7 @@ class ISalaService(ABC):
         pass
 
     @abstractmethod
-    def update_sala(self, id: int, nomeSala: str) -> Sala | None:
+    def update_sala(self, id: int, nome_sala: str) -> Sala | None:
         pass
 
     @abstractmethod

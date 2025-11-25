@@ -69,26 +69,21 @@ def process_messages(r):
 
                         response = requests.post(API_URL, json=payload_api)
                         
-                        # 3. Verifica sucesso (200 OK ou 201 Created)
                         if response.status_code in [200, 201]:
                             print(f"Sucesso API: {response.status_code}")
-                            # Confirma processamento no Redis (ACK) para remover da fila de pendentes
                             r.xack(STREAM_KEY, GROUP_NAME, message_id)
                         else:
                             print(f"Erro API: {response.status_code} - {response.text}")
-                            # Nota: Não damos ACK aqui, para tentar processar novamente depois 
-                            # (ou você pode implementar lógica de Dead Letter Queue)
+                            # Não recebe ACK aqui, para tentar processar novamente depois 
                             
                     except requests.exceptions.ConnectionError:
                         print(f"Erro de Conexão: Não foi possível conectar a {API_URL}")
                     except Exception as e:
                         print(f"Erro ao processar mensagem individual: {e}")
-                        # Opcional: Dar ACK se o erro for de dados inválidos para não travar a fila
-                        # r.xack(STREAM_KEY, GROUP_NAME, message_id)
 
         except Exception as e:
             print(f"Erro no loop principal do Redis: {e}")
-            time.sleep(5) # Espera um pouco antes de tentar reconectar
+            time.sleep(5)
 
 if __name__ == "__main__":
     redis_conn = connect_redis()

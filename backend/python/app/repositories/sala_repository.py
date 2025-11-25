@@ -15,7 +15,7 @@ class SalaRepository(ISalaRepository):
     def create(self, sala: Sala) -> Sala:
         model = SalaModel(
             id=sala.id,
-            nomeSala=sala.nomeSala
+            nome_sala=sala.nome_sala
         )
         db.session.add(model)
         db.session.commit()
@@ -29,7 +29,7 @@ class SalaRepository(ISalaRepository):
         if not model:
             return None
 
-        model.nomeSala = sala.nomeSala
+        model.nome_sala = sala.nome_sala
 
         db.session.commit()
         return model.to_entity()

@@ -6,19 +6,19 @@ from ..entities.sala import Sala
 class SalaModel(db.Model):
     __tablename__ = "sala"
 
-    nomeSala: Mapped[str] = mapped_column(String(50))
+    nome_sala: Mapped[str] = mapped_column(String(50))
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     
 
     def to_entity(self) -> Sala:
         return Sala(
-            nomeSala=self.nomeSala,
+            nome_sala=self.nome_sala,
             id=self.id,
         )
 
     @staticmethod
     def from_entity(entity: Sala):
         return SalaModel(
-            nomeSala=entity.nomeSala,
+            nome_sala=entity.nome_sala,
             id=entity.id,
         )

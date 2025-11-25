@@ -15,7 +15,7 @@ def criar_sala():
     data = request.get_json()
     schema = CreateSalaRequest(**data)
     dto = SalaDTO(
-        nomeSala=schema.nomeSala,
+        nome_sala=schema.nome_sala,
     )
     sala = sala_service.create_sala(dto)
     return jsonify(SalaResponse(**sala.__dict__).model_dump()), 201
@@ -40,7 +40,7 @@ def atualizar_sala(id: int):
     schema = CreateSalaRequest(**data)
 
     dto = SalaDTO(
-        nomeSala=schema.nomeSala,
+        nome_sala=schema.nome_sala,
         id=id,
     )
     sala = sala_service.update_sala(id, dto)

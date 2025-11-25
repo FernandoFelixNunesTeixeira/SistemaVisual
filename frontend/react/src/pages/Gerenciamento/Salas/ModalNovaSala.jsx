@@ -3,7 +3,7 @@ import '../ModalNovo.css';
 
 const ModalFormSala = ({ isOpen, onClose, onSave, salaParaAtualizar }) => {
     const initialFormState = {
-        nomeSala: '',
+        nome_sala: '',
     };
 
     const [formData, setFormData] = useState(initialFormState);
@@ -47,12 +47,12 @@ const ModalFormSala = ({ isOpen, onClose, onSave, salaParaAtualizar }) => {
 
                 <form onSubmit={handleSubmit} className="modal-body">
                     <div className="form-group">
-                        <label htmlFor="nomeSala">Nome da Sala</label>
+                        <label htmlFor="nome_sala">Nome da Sala</label>
                         <input
                             type="text"
-                            id="nomeSala"
-                            name="nomeSala"
-                            value={formData.nomeSala}
+                            id="nome_sala"
+                            name="nome_sala"
+                            value={formData.nome_sala}
                             onChange={handleChange}
                             placeholder="Nome"
                             required

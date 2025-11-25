@@ -3,6 +3,6 @@ from typing import Optional
 
 @dataclass
 class SalaDTO:
-    nomeSala: str
+    nome_sala: str
     id: Optional[int] = None
     

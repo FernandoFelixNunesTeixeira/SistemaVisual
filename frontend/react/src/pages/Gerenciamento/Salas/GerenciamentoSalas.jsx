@@ -106,7 +106,7 @@ function GerenciamentoSalas() {
                     <tbody>
                         {paginatedList.map((classroom, index) => (
                             <tr key={index}>
-                                <td>{classroom.nomeSala}</td>
+                                <td>{classroom.nome_sala}</td>
                                 <td>
                                     <div className="action-buttons">
                                         <button onClick={() => handleOpenUpdate(classroom)} className="action-btn edit" title="Editar">

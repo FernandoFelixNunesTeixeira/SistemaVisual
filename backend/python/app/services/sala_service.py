@@ -19,7 +19,7 @@ class SalaService(ISalaService):
         self.repo = repo
 
     def create_sala(self, sala: Sala) -> Sala:
-        if not sala.nomeSala or sala.nomeSala.strip() == "":
+        if not sala.nome_sala or sala.nome_sala.strip() == "":
             raise InvalidSalaDataError("Nome é obrigatório.")
 
         return self.repo.create(sala)
@@ -43,8 +43,8 @@ class SalaService(ISalaService):
             raise SalaNotFoundError(f"Sala com número '{id}' não encontrado para atualização.")
 
         # Atualiza campos individuais
-        if dados.nomeSala is not None:
-            sala.nomeSala = dados.nomeSala
+        if dados.nome_sala is not None:
+            sala.nome_sala = dados.nome_sala
 
         atualizado = self.repo.update(sala)
         if not atualizado:

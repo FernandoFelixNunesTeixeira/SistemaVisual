@@ -10,11 +10,11 @@ parameters:
     schema:
       type: object
       properties:
-        nomeSala:
+        nome_sala:
           type: string
           example: "C3"
       required:
-        - nomeSala
+        - nome_sala
 responses:
   201:
     description: "Sala criada"

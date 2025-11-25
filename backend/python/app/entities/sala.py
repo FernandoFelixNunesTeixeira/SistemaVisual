@@ -1,12 +1,12 @@
 class Sala:
     def __init__(
             self, 
-            nomeSala: str,
+            nome_sala: str,
             id: int
         ):
 
-        self.nomeSala = nomeSala
+        self.nome_sala = nome_sala
         self.id = id
 
     def __repr__(self):
-        return f"<Sala {self.nomeSala}>"
+        return f"<Sala {self.nome_sala}>"
