@@ -14,8 +14,8 @@ CREATE TABLE IF NOT EXISTS sala (
 
 CREATE TABLE IF NOT EXISTS horarios (
   id VARCHAR(9) NOT NULL,
-  hora_fim TIME NOT NULL,
-  hora_inicio TIME NOT NULL,
+  hora_fim VARCHAR(50) NOT NULL,
+  hora_inicio VARCHAR(50) NOT NULL,
   dia_semana VARCHAR(20) NOT NULL,
   PRIMARY KEY (id)
 );
