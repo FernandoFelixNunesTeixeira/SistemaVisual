@@ -4,7 +4,7 @@ import time
 
 
 class CreateTurmaRequest(BaseModel):
-    codigoDisc: str = Field(..., min_length=2, max_length=9)
+    codigo_disc: str = Field(..., min_length=2, max_length=9)
     nome: str = Field(..., min_length=2, max_length=50)
     ano: int
     semestre:int
@@ -13,7 +13,7 @@ class CreateTurmaRequest(BaseModel):
 
 class TurmaResponse(BaseModel):
     id: int
-    codigoDisc: str
+    codigo_disc: str
     nome: str
     ano: int
     semestre:int

@@ -10,7 +10,7 @@ parameters:
     schema:
       type: object
       properties:
-        codigoDisc:
+        codigo_disc:
           type: string
           example: "DWEC8"
         nome:
@@ -27,7 +27,7 @@ parameters:
           example: "Horario1" 
 
       required:
-        - codigoDisc
+        - codigo_disc
         - ano
         - horarios_id
 

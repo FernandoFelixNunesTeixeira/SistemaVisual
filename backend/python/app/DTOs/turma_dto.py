@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 @dataclass
 class CreateTurmaDTO:
-    codigoDisc: str
+    codigo_disc: str
     nome: str
     ano: int
     semestre: int
@@ -11,7 +11,7 @@ class CreateTurmaDTO:
 @dataclass
 class TurmaDTO:
     id: int
-    codigoDisc: str
+    codigo_disc: str
     nome: str
     ano: int
     semestre: int

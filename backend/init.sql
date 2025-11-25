@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS horarios (
 
 CREATE TABLE IF NOT EXISTS turmas (
   id BIGSERIAL NOT NULL,
-  codigoDisc VARCHAR(6) NOT NULL,
+  codigo_disc VARCHAR(6) NOT NULL,
   nome VARCHAR(50) NULL,
   ano INT NOT NULL,
   semestre INT NULL,
@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS notificacoes (
 -- USADO PARA TESTE DE NOTIFICACAO !!! RETIRAR APOS IMPLEMENTAR HORARIOS E TURMA NA API
 INSERT INTO horarios (id, hora_inicio, hora_fim, dia_semana)
 VALUES ('H001', '08:00:00', '10:00:00', 'Segunda-feira');
-INSERT INTO turmas (id, codigoDisc, Nome, ano, semestre, horarios_id)
+INSERT INTO turmas (id, codigo_disc, Nome, ano, semestre, horarios_id)
 VALUES (1, 'MAT101', 'Matemática Básica', 2025, 1, 'H001');
 
 CREATE TABLE IF NOT EXISTS turmas_has_aluno (
@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS turmas_has_sala_aula (
     ON UPDATE CASCADE,
   CONSTRAINT fk_turmas_has_sala_aula_sala_aula1
     FOREIGN KEY (sala_aula_id)
-    REFERENCES sala_aula (id)
+    REFERENCES sala (id)
     ON DELETE SET NULL
     ON UPDATE CASCADE);
 

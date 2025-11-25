@@ -20,7 +20,7 @@ class TurmaService(ITurmaService):
         self.repo = repo
 
     def create_turma(self, turma: Turma) -> Turma:
-        if not turma.codigoDisc or turma.codigoDisc.strip() == "":
+        if not turma.codigo_disc or turma.codigo_disc.strip() == "":
             raise InvalidTurmaDataError("Código da disciplina é obrigatório.")
         
         if not turma.ano:

@@ -2,7 +2,7 @@
 class Turma:
     def __init__(
             self, 
-            codigoDisc: str,
+            codigo_disc: str,
             nome: str,
             ano: int,
             semestre: int,
@@ -10,7 +10,7 @@ class Turma:
             horarios_id: str | None = None,
         ):
 
-        self.codigoDisc = codigoDisc
+        self.codigo_disc = codigo_disc
         self.nome= nome
         self.ano= ano
         self.semestre= semestre
@@ -18,4 +18,4 @@ class Turma:
         self.id = id
 
     def __repr__(self):
-        return f"<Turma {self.id} - {self.codigoDisc} - {self.horarios_id}>"
+        return f"<Turma {self.id} - {self.codigo_disc} - {self.horarios_id}>"

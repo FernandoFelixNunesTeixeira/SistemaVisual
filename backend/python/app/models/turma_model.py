@@ -7,7 +7,7 @@ class TurmaModel(db.Model):
     __tablename__ = "turmas"
 
     id: Mapped[int] = mapped_column(db.BigInteger, primary_key=True, autoincrement=True)
-    codigoDisc: Mapped[str] = mapped_column(String(6), nullable=False)
+    codigo_disc: Mapped[str] = mapped_column(String(6), nullable=False)
     nome: Mapped[str] = mapped_column(String(50))
     ano: Mapped[int] = mapped_column(String(4), nullable=False)
     semestre: Mapped[int] = mapped_column(String(2))
@@ -16,7 +16,7 @@ class TurmaModel(db.Model):
     def to_entity(self) -> Turma:
         return Turma(
             id=self.id,
-            codigoDisc=self.codigoDisc,
+            codigo_disc=self.codigo_disc,
             nome=self.nome,
             ano=self.ano,
             semestre = self.semestre,
@@ -27,7 +27,7 @@ class TurmaModel(db.Model):
     def from_entity(entity: Turma):
         return TurmaModel(
             id=entity.id,
-            codigoDisc=entity.codigoDisc,
+            codigo_disc=entity.codigo_disc,
             nome=entity.nome,
             ano=entity.ano,
             semestre = entity.semestre,

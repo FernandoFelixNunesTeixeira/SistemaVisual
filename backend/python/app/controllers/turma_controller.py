@@ -15,7 +15,7 @@ def criar_turma():
     schema = CreateTurmaRequest(**data)
 
     dto = CreateTurmaDTO(
-        codigoDisc = schema.codigoDisc,
+        codigo_disc = schema.codigo_disc,
         nome= schema.nome,
         ano= schema.ano,
         semestre= schema.semestre,
@@ -45,7 +45,7 @@ def atualizar_turma(id: int):
     schema = CreateTurmaRequest(**data)
 
     dto = CreateTurmaDTO(
-        codigoDisc = schema.codigoDisc,
+        codigo_disc = schema.codigo_disc,
         nome= schema.nome,
         ano= schema.ano,
         semestre= schema.semestre,
