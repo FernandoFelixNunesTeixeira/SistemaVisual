@@ -5,7 +5,7 @@ import time
 from datetime import datetime
 
 # --- Configurações do Redis e API---
-REDIS_HOST = "localhost"
+REDIS_HOST = "redis"
 REDIS_PORT = 6379
 STREAM_KEY = "processing_results"
 GROUP_NAME = "api_senders"
@@ -14,7 +14,7 @@ CONSUMER_NAME = "worker_1"
 API_URL = "http://localhost:5000/api/notificacoes"
 
 def connect_redis():
-    """Conecta ao Redis e cria o grupo de consumidores se não existir."""
+    print("CONECTANDO WORKER")
     r = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, decode_responses=True)
     try:
 

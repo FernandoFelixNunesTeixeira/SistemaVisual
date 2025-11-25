@@ -63,6 +63,24 @@ services:
     environment:
       - FLASK_ENV=development
     command: python app.py
+  worker:  
+    build:
+      context: ./backend/worker
+      dockerfile: Dockerfile
+    container_name: python_worker  
+    depends_on:
+      - postgres
+      - python
+      - redis 
+    volumes:
+      - ./backend/worker:/app 
+    environment:
+      - FLASK_ENV=development
+      - REDIS_HOST=redis 
+      - REDIS_PORT=6379
+      - API_URL=http://python:5000/api/notificacoes 
+    command: python worker.py
+
   redis:
     image: redis:alpine
     container_name: redis-server
