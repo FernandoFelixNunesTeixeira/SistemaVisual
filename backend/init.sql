@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS turmas (
 
 CREATE TABLE IF NOT EXISTS notificacoes (
   id BIGSERIAL NOT NULL,
-  occurred_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  occurred_at TIMESTAMP,
   porcentagem FLOAT NULL,
   turmas_id INT NOT NULL,
   PRIMARY KEY (id),
