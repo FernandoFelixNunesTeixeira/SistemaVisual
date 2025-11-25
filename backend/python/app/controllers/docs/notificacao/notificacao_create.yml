@@ -10,18 +10,15 @@ parameters:
     schema:
       type: object
       properties:
-        id:
-          type: integer
-          example: "1"
         occurred_at:
           type: time
-          example: NULL
+          example: 10:00:00
         porcentagem:
           type: float
           example: "0.95"
-        turmas_id:
-          type: int
-          example: "1" 
+        nome_sala:
+          type: str
+          example: "DWEC8" 
       required:
         - turmas_id
 
