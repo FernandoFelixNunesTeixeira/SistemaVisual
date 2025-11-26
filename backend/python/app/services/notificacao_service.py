@@ -3,14 +3,16 @@ from ..interfaces.notificacao_repository import INotificacaoRepository
 from ..entities.notificacao import Notificacao 
 from ..models.notificacao_model import NotificacaoModel
 from dataclasses import asdict
+from ..infrastructure.redis.event_bus_redis import RedisEventBus
 # Falta turma, ler INotificacaoService
 
 class NotificacaoNotFoundError(Exception):
     pass
 
 class NotificacaoService(INotificacaoService):
-    def __init__(self, repo: INotificacaoRepository): # ,turma_repo
+    def __init__(self, repo: INotificacaoRepository, event_bus): # ,turma_repo
         self.repo = repo
+        self.event_bus = event_bus
         #self.turma_repo = turma_repo
 
     def create_notificacao(self, entity: Notificacao):
@@ -29,9 +31,17 @@ class NotificacaoService(INotificacaoService):
         turmas_id = self.find_turma(entity.nome_sala, entity.occurred_at)
 
         model = NotificacaoModel.from_entity(entity)
-        #model.turmas_id = turma.id
         model.turmas_id = turmas_id # APENAAS PARA TESTE
-        return self.repo.create(model)
+
+        saved = self.repo.create(model)
+
+        self.event_bus.publish({
+            "id": str(saved.id),
+            "sala": saved.nome_sala,
+            "ocorrida_em": saved.occurred_at.isoformat()
+        })
+
+        return saved
 
     def get_notificacao(self, id: int) -> Notificacao:
         notificacao = self.repo.get_by_id(id)
@@ -45,7 +55,6 @@ class NotificacaoService(INotificacaoService):
             raise RuntimeError("Erro: list_all() retornou None.")
         return lista
 
-    # TODO: !IMPORTANTE um pouco! Precisa de update notificação acho que isso seria um erro talvez
     def update_notificacao(self, id: int, dados: dict) -> Notificacao:
         notificacao = self.repo.get_by_id(id)
         if not notificacao:
