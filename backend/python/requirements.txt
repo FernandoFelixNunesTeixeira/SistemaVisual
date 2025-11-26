@@ -9,3 +9,5 @@ setuptools
 flasgger==0.9.7b2
 flask-cors
 psycopg2-binary
+Flask-JWT-Extended
+Flask-Bcrypt
