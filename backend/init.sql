@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS aluno (
   PRIMARY KEY (matricula));
 
 CREATE TABLE IF NOT EXISTS sala (
-  id BIGINT NOT NULL,
+  id BIGSERIAL NOT NULL,
   nome_sala VARCHAR(3) NULL,
   PRIMARY KEY (id));
 
@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS docentes (
 -- teste@ifsp.edu.br
 -- 123456
 INSERT INTO docentes (matricula, nome, telefone, email, senha_hashed, foto, coordenador)
-VALUES ('PC000000X','Usuario de Teste','(11) 99999-9999','teste@ifsp.edu.br','$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxw96pBal.QMZ8hPot.Kz8v8/.Jde',NULL,1);
+VALUES ('PC000000X','Usuario de Teste','(11) 99999-9999','teste@ifsp.edu.br','$2a$12$.86nAiFNX9dVxhCx7YMct.TLN8p6mt0yYWFdT80tnsyRnB7nnWkJS',NULL,1);
 
 CREATE TABLE IF NOT EXISTS professor_has_turmas (
   professor_matricula VARCHAR(9) NOT NULL,

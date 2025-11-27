@@ -1,6 +1,17 @@
 swagger: "2.0"
 info:
   title: API Salas, Horários, Notificações, Docentes e Alunos 
+
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: 'JWT Authorization header Insira: Bearer Token'
+
+security:
+  - Bearer: []
+
 definitions:
   Sala:
     type: object
@@ -11,6 +22,7 @@ definitions:
       nome_sala:
         type: string
         example: "Sala A"
+
   Horario:
     type: object
     properties:
@@ -26,6 +38,7 @@ definitions:
       dia_semana:
         type: string
         example: "Segunda-feira"
+
   Turma:
     type: object
     properties:
@@ -44,6 +57,7 @@ definitions:
       horarios_id:
         type: string
         example: "Horario1"
+
   Aluno:
     type: object
     properties:
@@ -62,6 +76,7 @@ definitions:
       periodo_de_referencia:
           type: string
           example: "8º Semestre" 
+
   Docente:
     type: object
     properties:
@@ -80,6 +95,7 @@ definitions:
       coordenador:
           type: integer
           example: coordenador" 
+
   Notificacao:
     type: object
     properties:

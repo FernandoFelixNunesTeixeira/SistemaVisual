@@ -10,7 +10,7 @@ from app.controllers.horario_controller import horario_bp
 from app.controllers.sala_controller import sala_bp
 from app.controllers.notificacao_controller import notificacao_bp
 from app.controllers.turma_controller import turma_bp
-from app.infrastructure.security.autenticacao import auth_bp
+from app.controllers.autenticacao_controller import auth_bp
 from pydantic import ValidationError
 from datetime import datetime, timedelta, timezone
 #from infrastructure.database.db import db

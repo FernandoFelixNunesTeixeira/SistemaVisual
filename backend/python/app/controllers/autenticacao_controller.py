@@ -2,14 +2,16 @@ from flask import Blueprint, request, jsonify
 from flask_jwt_extended import create_access_token, get_jwt, get_jwt_identity, unset_jwt_cookies, jwt_required
 from datetime import datetime, timedelta, timezone
 import json
-from .extensoes import bcrypt
-from ...services.docente_service import DocenteService, DocenteNotFoundError
-from ...interfaces.docente_repository import IDocenteRepository
+from ..infrastructure.security.extensoes import bcrypt
+from ..services.docente_service import DocenteService, DocenteNotFoundError
+from ..interfaces.docente_repository import IDocenteRepository
+from flasgger import swag_from
 
 auth_bp = Blueprint('auth', __name__, url_prefix='/auth')
 docente_service = DocenteService()
 
 @auth_bp.route("/login", methods=["POST"])
+@swag_from('docs/docente/docente_login.yml')
 def create_token():
     email = request.json.get("email", None)
     senha_plaintext = request.json.get("senha", None)

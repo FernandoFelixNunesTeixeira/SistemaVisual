@@ -1,0 +1,49 @@
+tags:
+  - Autenticação
+summary: "Login"
+consumes:
+  - application/json
+parameters:
+  - in: body
+    name: body
+    required: true
+    description: Credenciais de login
+    schema:
+      type: object
+      required:
+        - email
+        - senha
+      properties:
+        email:
+          type: string
+          example: "teste@ifsp.edu.br"
+        senha:
+          type: string
+          example: "123456"
+responses:
+  200:
+    description: Login realizado com sucesso
+    schema:
+      type: object
+      properties:
+        access_token:
+          type: string
+          description: Token JWT para autenticação nas rotas protegidas
+  400:
+    description: Email e senha são necessários
+    schema:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "Email e senha são necessarios"
+  401:
+    description: Credenciais inválidas
+    schema:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "Senha ou Email incorreto"
+  500:
+    description: Erro interno do servidor
