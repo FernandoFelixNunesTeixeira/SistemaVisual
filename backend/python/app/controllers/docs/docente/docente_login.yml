@@ -14,7 +14,7 @@ parameters:
         - email
         - senha
         #pode-se declarar captchatoken como atributo obrigatório na api swagger
-        #, mas na api swagger isso não faz muito sentido
+        #, mas na api swagger isso não faz muito sentido, já que ele já requer token jwt
       properties:
         email:
           type: string
