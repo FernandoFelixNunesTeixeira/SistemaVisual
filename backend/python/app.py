@@ -73,10 +73,11 @@ def create_app():
             'root',
             'auth.create_token', 
             'static',
+            'recaptcha',
         ]
 
         # Signup
-        if request.endpoint == 'docente.criar_docente' and request.method == 'POST':
+        if request.endpoint == 'docentes.criar_docente' and request.method == 'POST':
             return
         
         # Notificacao precisa ser acessado por código externo camera e redis. Por enquanto não tera segurança

@@ -2,17 +2,18 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./login.css";
 import ReCAPTCHA from "react-google-recaptcha";
-import authService from "../services/authService"; 
+import authService from "../services/authService";
 
 // Tela de login, onde é capturado email e senha
 // Onde será realizado as verificações necessárias 
 // para saber se o usuário pode prosseguir
 function Login() {
-  const [email, setEmail] = useState(""); 
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  // PARTE DO CAPTCHA
   // Definir status do recaptcha
   const [captchaStatus, setCaptchaStatus] = useState(false);
 
@@ -26,44 +27,49 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!email || !password) { 
-        alert("Por favor, preencha todos os campos.");
-        return;
+    if (!email || !password) {
+      alert("Por favor, preencha todos os campos.");
+      return;
     }
 
-   if(captchaToken == '') {
+    if (captchaToken == '') {
       alert("Recaptcha inválido.");
       return;
-   }
-    
+    }
+
     //Falta deixar assincrono para não travar o prosseguimento da interface
     try {
-        const response = fetch('http://127.0.0.1:5000/recaptcha', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                'response': captchaToken
-            })
-        });
+      const response = fetch('http://127.0.0.1:5000/recaptcha', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          'response': captchaToken
+        })
+      });
 
-        const answer = response.json();
-        
-        print(answer);
-        navigate('/monitoring')
-        
+      //const answer = response.json();
+
+      //print(answer);
+      navigate('/monitoring')
+
     } catch (error) {
-        console.error("Erro na conexão:", error);
-        setStatus("Erro ao conectar");
+      console.error("Erro na conexão:", error);
+      //setStatus("Erro ao conectar");
     }
-    
 
-    if (true) { // TO-DO: Validar credencial com API
+    // ------------------------------------------
+    // AUTENTICACAO
+
+    setLoading(true);
+    try {
+      await authService.login(email, password);
+
       console.log("Authenticated!");
-      navigate("/"); 
+      navigate("/");
 
     } catch (error) {
       console.error("Erro no login:", error);
-      
+
       // tenta extrair a msg de errp do backend 
       const errorMessage = error.response?.data?.error || "Falha ao realizar login. Verifique suas credenciais.";
       alert(errorMessage);
@@ -78,25 +84,25 @@ function Login() {
         <h2 className="fw-bold mb-4">Login</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-floating mb-3 text-start">
-            <input type="email" className="form-control" id="email" placeholder="Email do Usuário" value={email} 
-            onChange={(e) => setEmail(e.target.value)} required/>
+            <input type="email" className="form-control" id="email" placeholder="Email do Usuário" value={email}
+              onChange={(e) => setEmail(e.target.value)} required />
             <label htmlFor="email">Email do Usuário</label>
           </div>
           <div className="form-floating mb-3 text-start">
-            <input type="password" className="form-control" id="password" placeholder="Senha" value={password} 
-            onChange={(e) => setPassword(e.target.value)} required/>
+            <input type="password" className="form-control" id="password" placeholder="Senha" value={password}
+              onChange={(e) => setPassword(e.target.value)} required />
             <label htmlFor="password">Senha</label>
           </div>
-          
+
           <div className="d-flex justify-content-center mb-3">
-            <ReCAPTCHA sitekey="6LfsVhIsAAAAAAKxE4bDSyeB_L2w-iEgPJcVtAlZ" onChange={onSucess}/>
+            <ReCAPTCHA sitekey="6LfsVhIsAAAAAAKxE4bDSyeB_L2w-iEgPJcVtAlZ" onChange={onSucess} />
           </div>
 
           <div className="text-start mb-4">
             <a href="#" className="link-secondary text-decoration-none small">Esqueci minha senha</a>
           </div>
-          
-          <button type="submit" className="btn btn-primary rounded-pill px-4"disabled={loading} >
+
+          <button type="submit" className="btn btn-primary rounded-pill px-4" disabled={loading} >
             {loading ? "ENTRANDO..." : "LOGIN"}
           </button>
         </form>
