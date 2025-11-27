@@ -92,27 +92,6 @@ def create_app():
         if request.endpoint and request.endpoint not in public_endpoints:
             verify_jwt_in_request()
     
-    @app.route('/recaptcha', methods = ['POST'])
-    def recaptcha():
-        print("Aqui")
-        dados = request.get_json()
-        response = dados.get('response')
-        recaptcha_request = requests.post(
-            'https://www.google.com/recaptcha/api/siteverify',
-            data = {
-                'secret': '<Substituir por chave secreta>',
-                'response': response
-            }
-        ).json()
-        print("Aqui")
-        if not recaptcha_request.get('success'):
-            #print('Recaptcha Inválido')
-            return 'Recaptcha Inválido'
-        #print('Recaptcha Válido')
-        return "Recaptcha válido"
-        print("Aqui")
-
-
 
     return app
 

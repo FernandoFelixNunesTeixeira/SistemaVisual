@@ -18,7 +18,7 @@ function Login() {
   const [captchaStatus, setCaptchaStatus] = useState(false);
 
   //Definir status da chave
-  const [captchaToken, setToken] = useState('');
+  const [captchatoken, setToken] = useState('');
   const onSucess = (key) => {
     setToken(key)
     setCaptchaStatus(true);
@@ -32,37 +32,21 @@ function Login() {
       return;
     }
 
-    if (captchaToken == '') {
-      alert("Recaptcha inválido.");
-      return;
+    //Função para verificar se o token recaptcha foi preenchido com algum valor, 
+    //se não for já retorna que o recaptcha é inválido
+    if (captchatoken == '') {
+     alert("Recaptcha inválido.");
+     return;
     }
 
-    //Falta deixar assincrono para não travar o prosseguimento da interface
-    try {
-      const response = fetch('http://127.0.0.1:5000/recaptcha', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          'response': captchaToken
-        })
-      });
-
-      //const answer = response.json();
-
-      //print(answer);
-      navigate('/monitoring')
-
-    } catch (error) {
-      console.error("Erro na conexão:", error);
-      //setStatus("Erro ao conectar");
-    }
+   
 
     // ------------------------------------------
     // AUTENTICACAO
 
     setLoading(true);
     try {
-      await authService.login(email, password);
+      await authService.login(email, password/*,  captchatoken*/);
 
       console.log("Authenticated!");
       navigate("/");

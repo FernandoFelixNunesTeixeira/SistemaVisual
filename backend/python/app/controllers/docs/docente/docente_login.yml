@@ -13,6 +13,8 @@ parameters:
       required:
         - email
         - senha
+        #pode-se declarar captchatoken como atributo obrigatório na api swagger
+        #, mas na api swagger isso não faz muito sentido
       properties:
         email:
           type: string
@@ -20,6 +22,9 @@ parameters:
         senha:
           type: string
           example: "123456"
+        captchatoken:
+          type: string
+          example: "Colocar o resultado do recaptcha"
 responses:
   200:
     description: Login realizado com sucesso

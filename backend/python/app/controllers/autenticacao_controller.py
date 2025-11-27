@@ -5,6 +5,7 @@ import json
 from ..infrastructure.security.extensoes import bcrypt
 from ..services.docente_service import DocenteService, DocenteNotFoundError
 from ..interfaces.docente_repository import IDocenteRepository
+import requests
 from flasgger import swag_from
 
 auth_bp = Blueprint('auth', __name__, url_prefix='/auth')
@@ -15,6 +16,22 @@ docente_service = DocenteService()
 def create_token():
     email = request.json.get("email", None)
     senha_plaintext = request.json.get("senha", None)
+    #Comentado como bloco de texto, para não ter nem que expor a chave
+    #secreta da api, nem atrapalhar testes da aplicação, mas funciona
+    #a verificação do recaptcha no backend
+    """response = request.json.get("captchatoken", None)
+    recaptcha_request = requests.post(
+        'https://www.google.com/recaptcha/api/siteverify',
+        data = {
+            'secret': '<Trocar pela chave secreta do recaptcha>',
+            'response': response
+        }
+    ).json()
+
+    if not recaptcha_request.get('success'):
+        #print('Recaptcha Inválido')
+        return jsonify({"error": f"Recaptcha Inválido"}), 400 }"""
+        
     
     if not email or not senha_plaintext:
         return jsonify({"error": "Email e senha são necessarios"}), 400

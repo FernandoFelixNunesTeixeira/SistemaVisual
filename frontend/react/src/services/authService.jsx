@@ -2,11 +2,14 @@ import axios from "axios";
 
 const API_URL = "http://localhost:5000/api/auth";
 
-const login = async (email, senha) => {
+/*Captchatoken comentado por ser só recebido com backend contendo
+a chave secreta que optou-se por não expor*/
+const login = async (email, senha /*, captchatoken*/) => {
   try {
     const response = await axios.post(`${API_URL}/login`, {
       email,
-      senha,
+      senha //,
+      //captchatoken
     });
 
     if (response.data.access_token) {
