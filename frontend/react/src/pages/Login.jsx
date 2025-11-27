@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./login.css";
 import ReCAPTCHA from "react-google-recaptcha"
@@ -13,10 +13,11 @@ function Login() {
 
   //Definir status do recaptcha
   const [captchaStatus, setCaptchaStatus] = useState(false);
+
   //Definir status da chave
-  const [key, setKey] = useState('');
-  const onSucess = (value) => {
-    console.log(value)
+  const [captchaToken, setToken] = useState('');
+  const onSucess = (key) => {
+    setToken(key)
     setCaptchaStatus(true);
   }
 
@@ -28,6 +29,32 @@ function Login() {
         alert("Por favor, preencha todos os campos.");
         return;
     }
+
+   if(captchaToken == '') {
+      alert("Recaptcha inválido.");
+      return;
+   }
+    
+    //Falta deixar assincrono para não travar o prosseguimento da interface
+    try {
+        const response = fetch('http://127.0.0.1:5000/recaptcha', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                'response': captchaToken
+            })
+        });
+
+        const answer = response.json();
+        
+        print(answer);
+        navigate('/monitoring')
+        
+    } catch (error) {
+        console.error("Erro na conexão:", error);
+        setStatus("Erro ao conectar");
+    }
+    
 
     if (true) { // TO-DO: Validar credencial com API
       console.log("Authenticated!");

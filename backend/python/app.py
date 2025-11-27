@@ -16,6 +16,7 @@ from datetime import datetime, timedelta, timezone
 #from entities.docente import Docente
 from flask_bcrypt import Bcrypt
 import json
+import requests
 
 
 
@@ -138,6 +139,28 @@ def create_app():
         }
 
         return docente_bp
+    
+    @app.route('/recaptcha', methods = ['POST'])
+    def recaptcha():
+        print("Aqui")
+        dados = request.get_json()
+        response = dados.get('response')
+        recaptcha_request = requests.post(
+            'https://www.google.com/recaptcha/api/siteverify',
+            data = {
+                'secret': '<Substituir por chave secreta>',
+                'response': response
+            }
+        ).json()
+        print("Aqui")
+        if not recaptcha_request.get('success'):
+            #print('Recaptcha Inválido')
+            return 'Recaptcha Inválido'
+        #print('Recaptcha Válido')
+        return "Recaptcha válido"
+        print("Aqui")
+
+
 
     return app
 
