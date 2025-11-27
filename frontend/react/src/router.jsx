@@ -11,7 +11,7 @@ import AlertDashboard from "./pages/Alerts/AlertDashboard.jsx";
 import GerenciamentoAlunos from "./pages/Gerenciamento/Alunos/GerenciamentoAlunos.jsx";
 import './main.css';
 import GerenciamentoSalas from "./pages/Gerenciamento/Salas/GerenciamentoSalas.jsx";
-import Streaming from "./pages/Streaming.jsx";
+import VideoStream from "./pages/VideoStream.jsx";
 import GerenciamentoDocentes from "./pages/Gerenciamento/Docentes/GerenciamentoDocentes.jsx";
 
 const isAuthenticated = () => {
@@ -78,7 +78,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/video",
-                element: <Streaming />
+                element: <VideoStream />
             }
         ],
     },

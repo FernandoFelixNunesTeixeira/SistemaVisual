@@ -1,7 +1,8 @@
 import { useMemo, useState, useEffect } from 'react';
 import './AlertDashboard.css';
 import usePaginationAndFilter from '../../hooks/usePaginationAndFilter';
-import { getNotificacaoById, getNotificacoes } from '../../services/notificacoesService';
+import { getNotificacoes } from '../../services/notificacoesService';
+import { getTurmasById } from '../../services/turmasService';
 
 //Obter data atual
 const getTodayString = () => new Date().toDateString();
@@ -10,7 +11,81 @@ function AlertDashboard() {
     const [apiData, setApiData] = useState([]);
 
     useEffect(() => {
-        getNotificacoes().then(res => setApiData(res.data));
+        const fetchInitialData = async () => {
+            try {
+                const res = await getNotificacoes();
+                const notifications = res.data;
+
+                const newApiData = await Promise.all(
+                    notifications.map(async (alert) => {
+                        if (alert.turmas_id) {
+                            try {
+                                const turmaRes = await getTurmasById(alert.turmas_id);
+                                return { 
+                                    ...alert, 
+                                    codigo_disc: turmaRes.data.codigo_disc 
+                                };
+                            } catch (error) {
+                                console.error(`Erro ao buscar detalhes da turma ${alert.turmas_id}:`, error);
+                                return alert;
+                            }
+                        }
+                        return alert;
+                    })
+                );
+                
+                setApiData(newApiData);
+            } catch (error) {
+                console.error("Erro ao carregar notificações:", error);
+            }
+        };
+
+        fetchInitialData();
+    }, []);
+
+    // conexão SSE para atualizações em temp oreal
+    useEffect(() => {
+        const eventSource = new EventSource("http://localhost:5000/api/notificacoes/stream");
+
+        eventSource.onmessage = async (event) => {
+            if (event.data === "connected" || event.data.includes('"status": "connected"')) return;
+
+            try {
+                const newAlert = JSON.parse(event.data);
+                
+                let normalizedAlert = {
+                    ...newAlert,
+                    id: Date.now(), 
+                    turmas_id: newAlert.nome_sala || newAlert.turmas_id, 
+                    status: 'Novo' 
+                };
+
+                // Busca o codigo_disc para a nova notificação em tempo real
+                if (normalizedAlert.turmas_id) {
+                    try {
+                        const turmaRes = await getTurmasById(normalizedAlert.turmas_id);
+                        normalizedAlert.codigo_disc = turmaRes.data.codigo_disc;
+                    } catch (error) {
+                        console.error("Erro ao buscar detalhes da turma (SSE):", error);
+                    }
+                }
+
+                setApiData((prevData) => [normalizedAlert, ...prevData]);
+
+            } catch (error) {
+                console.error("Erro ao processar atualização em tempo real:", error);
+            }
+        };
+
+        eventSource.onerror = () => {
+            console.log("Conexão SSE do Dashboard perdida.");
+            eventSource.close();
+            // todo implementar lógica de reconexão aqui  
+        };
+
+        return () => {
+            eventSource.close();
+        };
     }, []);
 
     const {
@@ -29,15 +104,23 @@ function AlertDashboard() {
 
         const totalAlerts = apiData.length;
         const pendingAlerts = apiData.filter(alert => alert.status === 'PENDING').length;
-        const todayAlerts = apiData.filter(alert => new Date(alert.date).toDateString() == todayString).length;
+        
+        const todayAlerts = apiData.filter(alert => {
+            const alertDate = new Date(typeof alert.occurred_at === 'number' ? alert.occurred_at * 1000 : alert.occurred_at);
+            return alertDate.toDateString() === todayString;
+        }).length;
         
         return { totalAlerts, pendingAlerts, todayAlerts };
-    }, []);
+    }, [apiData]);
 
     const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
 
-    // Retorna um dashboard contendo um cabeçalho escrito alertas em tempo-real, no qual é possível ver as abas todos os alertas,
-    // novos alertas e alertas pendentes
+    const formatDate = (val) => {
+        if (!val) return "-";
+        const dateObj = new Date(typeof val === 'number' ? val * 1000 : val);
+        return dateObj.toLocaleString('pt-BR'); 
+    };
+
     return (
         <div className="alert-dashboard-container py-5">
             <div className="alert-main-card">
@@ -60,8 +143,9 @@ function AlertDashboard() {
                             {paginatedList.length > 0 ? (
                                 paginatedList.map(alert => (
                                     <a href="#" className="alert-item" key={alert.id}>
-                                        {/* TODO IMPORTANTE !!! Formatacao de occurred at */}
-                                        <span className="alert-time">{alert.occurred_at} – {alert.turmas_id}</span>
+                                        <span className="alert-time">
+                                            {formatDate(alert.occurred_at)} – {alert.codigo_disc || alert.turmas_id} - ({alert.porcentagem * 100}%)
+                                        </span>
                                         <span className="alert-arrow">&gt;</span>
                                     </a>
                                 ))

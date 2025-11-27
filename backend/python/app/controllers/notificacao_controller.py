@@ -1,12 +1,14 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, Response
 from ..services.notificacao_service import NotificacaoService
 from ..repositories.notificacao_repository import NotificacaoRepository
 from ..schemas.notificacao_schema import CreateNotificacaoRequest, NotificacaoResponse
 from ..DTOs.notificacao_dto import CreateNotificacaoDTO, NotificacaoDTO
 from flasgger import swag_from
+from ..infrastructure.redis.event_bus_redis import RedisEventBus
 
 notificacao_bp = Blueprint("notificacoes", __name__)
-notificacao_service = NotificacaoService(NotificacaoRepository())
+notificacao_service = NotificacaoService(NotificacaoRepository(), RedisEventBus())
+event_bus = RedisEventBus()
 
 @notificacao_bp.post("/")
 @swag_from('docs/notificacao/notificacao_create.yml')
@@ -29,6 +31,13 @@ def criar_notificacao():
     )
     return jsonify(response.model_dump()), 201
 
+@notificacao_bp.get("/stream")
+def stream():
+    def event_stream():
+        for msg in event_bus.subscribe():
+            yield f"data: {msg}\n\n"
+
+    return Response(event_stream(), mimetype="text/event-stream")
 
 @notificacao_bp.get("/")
 @swag_from('docs/notificacao/notificacao_list.yml')

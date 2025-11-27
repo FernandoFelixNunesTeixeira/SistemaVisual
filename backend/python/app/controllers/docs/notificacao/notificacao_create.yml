@@ -12,7 +12,7 @@ parameters:
       properties:
         occurred_at:
           type: time
-          example: 10:00:00
+          example: "2025-11-26T15:30:00.000Z"
         porcentagem:
           type: float
           example: "0.95"

@@ -11,3 +11,4 @@ flask-cors
 psycopg2-binary
 Flask-JWT-Extended
 Flask-Bcrypt
+redis
