@@ -19,6 +19,9 @@ parameters:
         telefone:
           type: string
           example: "(11) 99999-9999"
+        senha:
+          type: string
+          example: "1234"
         email:
           type: string
           example: "teste@aluno.ifsp.edu.br" 

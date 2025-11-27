@@ -64,7 +64,7 @@ services:
     environment:
       - FLASK_ENV=development
     command: python app.py
-    
+
   worker:  
     build:
       context: ./backend/worker

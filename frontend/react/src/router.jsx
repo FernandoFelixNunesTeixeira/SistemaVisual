@@ -13,9 +13,10 @@ import './main.css';
 import GerenciamentoSalas from "./pages/Gerenciamento/Salas/GerenciamentoSalas.jsx";
 import VideoStream from "./pages/VideoStream.jsx";
 import GerenciamentoDocentes from "./pages/Gerenciamento/Docentes/GerenciamentoDocentes.jsx";
+import authService from "./services/authService";
 
 const isAuthenticated = () => {
-    return true; // TO-DO: GETS AUTHENTICAITON TOKEN FROM API OR LOCALSTORAGE
+    return authService.isAuthenticated();
 };
 
 const ProtectedRoute = ({ children }) => {

@@ -87,9 +87,15 @@ CREATE TABLE IF NOT EXISTS docentes (
   nome VARCHAR(50) NOT NULL,
   telefone VARCHAR(50) NULL,
   email VARCHAR(50) NOT NULL,
+  senha_hashed VARCHAR(255) NOT NULL,
   foto VARCHAR(45) NULL,
   coordenador INT NOT NULL,
   PRIMARY KEY (matricula));
+
+-- teste@ifsp.edu.br
+-- 123456
+INSERT INTO docentes (matricula, nome, telefone, email, senha_hashed, foto, coordenador)
+VALUES ('PC000000X','Usuario de Teste','(11) 99999-9999','teste@ifsp.edu.br','$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxw96pBal.QMZ8hPot.Kz8v8/.Jde',NULL,1);
 
 CREATE TABLE IF NOT EXISTS professor_has_turmas (
   professor_matricula VARCHAR(9) NOT NULL,

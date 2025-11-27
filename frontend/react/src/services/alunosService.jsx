@@ -1,30 +1,23 @@
-import axios from "axios";
+import api from "./api";
 
-const API_URL = "http://127.0.0.1:5000/api/alunos"; 
+const BASE_PATH = "/alunos"; 
 
 export const getAlunos = async () => {
-  return axios.get(API_URL);
+  return api.get(`${BASE_PATH}/`);
 };
 
-// 🔹 Retorna aluno por matricula
 export const getAlunoById = async (matricula) => {
-  return axios.get(`${API_URL}/${matricula}`);
+  return api.get(`${BASE_PATH}/${matricula}`);
 };
 
-// 🔹 Cadastra um novo aluno
-// (seu endpoint é /api/aluno/cadastro)
 export const createAluno = async (aluno) => {
-  return axios.post(`${API_URL}/`, aluno);
+  return api.post(`${BASE_PATH}/`, aluno);
 };
 
-// 🔹 Atualiza um aluno existente
-// (seu endpoint é /api/aluno/{matricula})
 export const updateAluno = async (matricula, aluno) => {
-  return axios.put(`${API_URL}/${matricula}`, aluno);
+  return api.put(`${BASE_PATH}/${matricula}`, aluno);
 };
 
-// 🔹 Deleta um aluno
 export const deleteAluno = async (matricula) => {
-  return axios.delete(`${API_URL}/${matricula}`);
+  return api.delete(`${BASE_PATH}/${matricula}`);
 };
-

@@ -1,0 +1,17 @@
+tags:
+  - Docente
+summary: "Buscar docente pela email"
+description: "Retorna um docente específicado pela sua Email."
+parameters:
+  - name: email
+    in: path
+    required: true
+    type: string
+    description: "Email do docente a ser recuperado"
+responses:
+  200:
+    description: "Docente encontrado"
+    schema:
+      $ref: '#/definitions/Docente'
+  404:
+    description: "Docente não encontrado"

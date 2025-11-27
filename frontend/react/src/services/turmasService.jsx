@@ -1,27 +1,28 @@
-import axios from "axios";
+import api from "./api";
 
-const API_URL = "http://127.0.0.1:5000/api/turmas"; 
+const BASE_PATH = "/turmas";
+
 
 export const getTurmas = async () => {
-  return axios.get(API_URL);
+  return api.get(`${BASE_PATH}/`);
 };
 
 // Retorna turma por ID
 export const getTurmasById = async (id) => {
-  return axios.get(`${API_URL}/${id}`);
+  return api.get(`${BASE_PATH}/${id}`);
 };
 
 // Cadastra uma nova turma
 export const createTurma = async (turma) => {
-  return axios.post(`${API_URL}/`, turma);
+  return api.post(`${BASE_PATH}/`, turma);
 };
 
 // Atualiza uma turma existente
 export const updateTurma = async (id, turma) => {
-  return axios.put(`${API_URL}/${id}`, turma);
+  return api.put(`${BASE_PATH}/${id}`, turma);
 };
 
 // Deleta uma turma existente
 export const deleteTurma= async (id) => {
-  return axios.delete(`${API_URL}/${id}`);
+  return api.delete(`${BASE_PATH}/${id}`);
 };

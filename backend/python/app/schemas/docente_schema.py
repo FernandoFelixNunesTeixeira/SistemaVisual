@@ -18,6 +18,7 @@ class CreateDocenteRequest(BaseModel):
         description="Formato: AA999999X",
     )
     foto: Optional[str] = None
+    senha: Optional[str] = None
     coordenador: int
 
 class DocenteResponse(BaseModel):

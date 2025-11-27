@@ -1,9 +1,18 @@
+import { useNavigate } from 'react-router-dom';
+import authService from '../services/authService';
 import './User.css';
 
 //Tela User, no qual é mostrado o perfil de usuário, um botão em que o usuário informa
 //se aceita receber notificações por email, botão de sair para voltar para a tela de login
 //E seu conjunto de salas de aula e horários
 function User() {
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        authService.logout(); 
+        navigate('/login'); 
+    };
+
     return (
         <div className="container user-profile-page py-5">
             <div className="row justify-content-center align-items-start gy-4 py-5">
@@ -12,9 +21,9 @@ function User() {
 
                     <div className="card profile-card position-relative border-0 shadow-sm rounded-4">
 
-                        <button type="button" className="btn btn-light btn-icon exit-btn position-absolute top-0 start-0 translate-middle rounded-circle shadow-sm">
-                            <a href="./login"><img src="https://api.iconify.design/ph/sign-out-bold.svg?color=%23009ef7&width=20&height=20" alt="Sair" />
-                            </a>
+                        <button type="button" className="btn btn-light btn-icon exit-btn position-absolute top-0 start-0 translate-middle rounded-circle shadow-sm"
+                            onClick={handleLogout} title="Sair">
+                            <img src="https://api.iconify.design/ph/sign-out-bold.svg?color=%23009ef7&width=20&height=20" alt="Sair" />
                         </button>
 
                         <div className="profile-pic-container position-relative">

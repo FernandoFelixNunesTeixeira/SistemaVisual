@@ -8,6 +8,7 @@ const ModalFormDocente = ({ isOpen, onClose, onSave, docenteParaAtualizar }) => 
         email: '',
         telefone: '',
         coordenador: '',
+        senha: '', 
     };
 
     const [formData, setFormData] = useState(initialFormState);
@@ -15,7 +16,8 @@ const ModalFormDocente = ({ isOpen, onClose, onSave, docenteParaAtualizar }) => 
     useEffect(() => {
         if (isOpen) {
             if (docenteParaAtualizar) {
-                setFormData({...initialFormState, ...docenteParaAtualizar});
+                // para editar senha, que n pode vir da api, não funcional. Precisa mexer no update em docentes
+                setFormData({ ...initialFormState, ...docenteParaAtualizar, senha: '' });
             } else {
                 setFormData(initialFormState);
             }
@@ -73,6 +75,20 @@ const ModalFormDocente = ({ isOpen, onClose, onSave, docenteParaAtualizar }) => 
                             onChange={handleChange}
                             placeholder="nome@ifsp.edu.br"
                             required
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="senha">Senha</label>
+                        <input
+                            type="password"
+                            id="senha"
+                            name="senha"
+                            value={formData.senha}
+                            onChange={handleChange}
+                            placeholder={isUpdateMode ? "Deixe em branco para manter a atual" : "Senha"}
+                            required={!isUpdateMode} 
+                            minLength={6}
                         />
                     </div>
 

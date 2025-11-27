@@ -11,6 +11,10 @@ class IDocenteService(ABC):
         pass
 
     @abstractmethod
+    def get_docente_by_email(self, email: str) -> Docente | None:
+        pass
+
+    @abstractmethod
     def list_docentes(self) -> list[Docente]:
         pass
 

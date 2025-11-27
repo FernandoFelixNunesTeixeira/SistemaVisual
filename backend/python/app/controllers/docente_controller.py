@@ -8,6 +8,7 @@ from flasgger import swag_from
 docente_bp = Blueprint("docentes", __name__)
 docente_service = DocenteService(DocenteRepository())
 
+# ATUA COMO SIGN-UP
 @docente_bp.post("/")
 @swag_from('docs/docente/docente_create.yml')
 def criar_docente():
@@ -19,12 +20,12 @@ def criar_docente():
         email=schema.email,
         telefone=schema.telefone,
         matricula=schema.matricula,
+        senha=schema.senha,
         foto="",
         coordenador=schema.coordenador,
     )
     docente = docente_service.create_docente(dto)
     return jsonify(DocenteResponse(**docente.__dict__).model_dump()), 201
-
 
 @docente_bp.get("/")
 @swag_from('docs/docente/docente_list.yml')
@@ -37,6 +38,12 @@ def listar_docentes():
 @swag_from('docs/docente/docente_search.yml')
 def buscar_por_matricula(matricula: str):
     docente = docente_service.get_docente(matricula)
+    return jsonify(DocenteResponse(**docente.__dict__).model_dump()), 200
+
+@docente_bp.get("/email/<string:email>")
+@swag_from('docs/docente/docente_search_by_email.yml')
+def buscar_por_email(email: str):
+    docente = docente_service.get_docente_by_email(email)
     return jsonify(DocenteResponse(**docente.__dict__).model_dump()), 200
 
 @docente_bp.put("/<string:matricula>")

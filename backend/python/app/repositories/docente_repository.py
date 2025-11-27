@@ -12,6 +12,13 @@ class DocenteRepository(IDocenteRepository):
         else:
             return None
 
+    def get_by_email(self, email: str) -> Docente | None:
+        model = DocenteModel.query.filter_by(email=email).first()
+        if model:
+            return model.to_entity()
+        else:
+            return None
+
     def create(self, docente: Docente) -> Docente:
         model = DocenteModel(
             matricula=docente.matricula,
@@ -20,6 +27,7 @@ class DocenteRepository(IDocenteRepository):
             telefone=docente.telefone,
             foto=docente.foto,
             coordenador=docente.coordenador,
+            senha_hashed=docente.senha_hashed
         )
         db.session.add(model)
         db.session.commit()
