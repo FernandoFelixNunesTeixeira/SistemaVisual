@@ -8,4 +8,4 @@ O objetivo do website é fornecer um ambiente seguro e organizado no qual os fis
   - Acompanhar o comportamento por sala e período;
   - Consultar informações de alunos quando necessário.
 
-Foi decidido não agregar o código referente ao processamento digital de imagens para identificação de estudantes utilizando celulares, apesar de o mesmo ter sido elaborado. Além disso, também foi feita a escolha de não continuar o projeto, promovendo seus últimos avanços, dado que o objetivo de aprendizagem com este projeto já foi atingido, sendo que um dos aprimoramentos faltantes seria mostrar na interface os dados usuários quando estes acessassem a página que mostra o perfil do usuário.
+Foi decidido não agregar o código referente ao processamento digital de imagens para identificação de estudantes utilizando celulares, apesar de o mesmo ter sido elaborado. Além disso, também foi feita a escolha de não continuar o projeto, dado que o objetivo de aprendizagem com este projeto já foi atingido, sendo que um dos seus poucos aprimoramentos faltantes seria mostrar na interface os dados do usuário quando estes acessassem a página responvável por mostrar o seu perfil.
